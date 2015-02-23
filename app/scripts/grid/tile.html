@@ -1,0 +1,7 @@
+<div ng-if='ngModel' class="tile position-{{ ngModel.x }}-{{ ngModel.y }} tile-{{ ngModel.value }}"
+  ng-class="{ 'tile-merged': ngModel.merged}">
+  <div class="tile-inner" ng-click="selectTimer(ngModel.x, ngModel.y)">
+    {{ ngModel.value }}
+    <!--<a ng-click="selectTimer()">{{ ngModel.value }}</a>-->
+  </div>
+</div>

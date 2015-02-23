@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>"Timer"</title>
+
+    <!-- build:css styles/vendor.css -->
+    <!-- <link rel="stylesheet" href="vendor/some.contrib.css"> -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="lib/ionic/release/css/ionic.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:css({.tmp,app}) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+  </head>
+
+  <body ng-app="TimerApp">
+
+    <ion-pane>
+      <ion-header-bar class="bar-stable">
+        <h1 class="title">Timer</h1>
+      </ion-header-bar>
+      <!-- Add your site or application content here -->
+      <div class="container" ng-include="'views/main.html'">
+
+        <!--<div class="container" ng-include="'views/main.html'"></div>-->
+      </div>
+    </ion-pane>
+
+
+
+
+
+    <!-- build:js scripts/vendor.js -->
+    <!-- <script src="vendor/someContribJs.js"></script> -->
+    <!-- bower:js -->
+    <script src="lib/jquery/dist/jquery.js"></script>
+    <script src="lib/es5-shim/es5-shim.js"></script>
+    <script src="lib/angular/angular.js"></script>
+    <script src="lib/angular-animate/angular-animate.js"></script>
+    <script src="lib/angular-sanitize/angular-sanitize.js"></script>
+    <script src="lib/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="lib/ionic/release/js/ionic.js"></script>
+    <script src="lib/ionic/release/js/ionic-angular.js"></script>
+    <script src="lib/angular-timer/dist/angular-timer.js"></script>
+    <script src="lib/json3/lib/json3.min.js"></script>
+    <script src="lib/bootstrap-sass-official/assets/javascripts/bootstrap.js"></script>
+    <script src="lib/angular-cookies/angular-cookies.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
+
+
+    <!-- build:js scripts/scripts.js -->
+    <script src="scripts/config.js"></script>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/grid/grid.js"></script>
+    <script src="scripts/grid/grid_directive.js"></script>
+    <script src="scripts/grid/tile_directive.js"></script>
+    <script src="scripts/timer/timer.js"></script>
+    <!-- endbuild -->
+</body>
+</html>

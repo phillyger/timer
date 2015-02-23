@@ -1,0 +1,52 @@
+<div id="content" ng-controller='TimerController as ctrl'>
+  <!-- heading -->
+  <!--<div id="heading" class="row">-->
+    <!--<h1 class="title">ng-2048</h1>-->
+    <!--<div class="scores-container">-->
+      <!--<div class="score-container">{{ctrl.timer.currentScore}}</div>-->
+      <!--<div class="best-container">{{ctrl.timer.highScore}}</div>-->
+    <!--</div>-->
+  <!--</div>-->
+
+  <!-- instructions -->
+  <!--<div id="instructions" class="row">-->
+    <!--Join the numbers and get to the <strong>2048</strong> tile!-->
+    <!--<button ng-click='ctrl.newTimer()' class="restart-button">New timer</button>-->
+  <!--</div>-->
+
+  <div id="timer-container">
+    <div grid ng-model='ctrl.timer' class=""></div>
+
+    <!--<div id="timer-over" ng-if="ctrl.timer.timerOver" class="row timer-overlay">-->
+      <!--Timer over-->
+
+      <!--<div class="lower">-->
+        <!--<a class="retry-button" ng-click='ctrl.newTimer()'>Try again</a>-->
+      <!--</div>-->
+    <!--</div>-->
+
+    <!--<div id="win" ng-if="ctrl.timer.win" class="row timer-overlay">-->
+      <!--You win!-->
+
+      <!--<div class="lower">-->
+        <!--<a class="retry-button" ng-click='ctrl.newTimer()'>Try again</a>-->
+      <!--</div>-->
+    <!--</div>-->
+  </div>
+
+  <!--<p class="timer-explanation">-->
+    <!--<strong class="important">How to play:</strong> Use your <strong>arrow keys</strong> to move the tiles. When two tiles with the same number touch, they <strong>merge into one!</strong>-->
+  <!--</p>-->
+  <!--<hr>-->
+
+  <!--<p>-->
+    <!--<strong class="important">NOTE:</strong> This timer was written using AngularJS.-->
+  <!--</p>-->
+
+  <!--<hr>-->
+
+  <!--<p>-->
+    <!--Created by <a href="http://fullstackedu.com">Fullstack.io</a> based on 2048 by <a href="http://gabrielecirulli.com" target="_blank">Gabriele Cirulli.</a> Based on <a href="https://itunes.apple.com/us/app/1024!/id823499224" target="_blank">1024 by Veewo Studio</a> and conceptually similar to <a href="http://asherv.com/threes/" target="_blank">Threes by Asher Vollmer.</a>-->
+  <!--</p>-->
+
+</div>
