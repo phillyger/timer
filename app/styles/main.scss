@@ -232,6 +232,10 @@ h1.title {
   }
 }
 
+timer {
+  font-size: .5em;
+}
+
 @mixin layout-board($tile-count: 4) {
   $tile-size: ($width - $tile-padding * ($tile-count + 1)) / $tile-count;
   #timer-#{$tile-count} {

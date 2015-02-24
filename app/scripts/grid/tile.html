@@ -1,7 +1,12 @@
 <div ng-if='ngModel' class="tile position-{{ ngModel.x }}-{{ ngModel.y }} tile-{{ ngModel.value }}"
   ng-class="{ 'tile-merged': ngModel.merged}">
-  <div class="tile-inner" ng-click="selectTimer(ngModel.x, ngModel.y)">
+  <div ng-show="showNumber()" class="tile-inner" ng-click="selectTimer(ngModel.x, ngModel.y)">
     {{ ngModel.value }}
-    <!--<a ng-click="selectTimer()">{{ ngModel.value }}</a>-->
+  </div>
+  <div ng-show="showCountDownTimer()" class="tile-inner" ng-style="style">
+    <timer autostart="false" max-time-unit="'minute'" interval="1000" countdown="12">{{mminutes}}:{{sseconds}}</timer>
+  </div>
+  <div ng-show="showCountUpTimer()" class="tile-inner" ng-style="style">
+    <timer autostart="false" max-time-unit="'minute'" interval="1000">{{mminutes}}:{{sseconds}}</timer>
   </div>
 </div>
