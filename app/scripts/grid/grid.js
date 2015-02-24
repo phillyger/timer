@@ -95,12 +95,13 @@ angular.module('Grid', [])
     };
 
     // Build timer board
-    this.buildEmptyTimerBoard = function() {
+    this.buildEmptyLayoutBoard = function() {
       var self = this;
       // Initialize our grid
       for (var x = 0; x < service.size * service.size; x++) {
         this.grid[x] = null;
       }
+
 
       this.forEach(function(x,y) {
         self.setCellAt({x:x,y:y}, null);
@@ -237,6 +238,7 @@ angular.module('Grid', [])
     this.setCellAt = function(pos, tile) {
       if (this.withinGrid(pos)) {
         var xPos = this._coordinatesToPosition(pos);
+        //console.log(tile);
         this.tiles[xPos] = tile;
       }
     };
@@ -343,6 +345,7 @@ angular.module('Grid', [])
     this.fixedInsertNewTile = function(val) {
       var cell = this.nextAvailableCell(),
         tile = this.newTile(cell, val);
+      //console.log(tile);
       this.insertTile(tile);
     };
 

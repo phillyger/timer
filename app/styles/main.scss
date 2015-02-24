@@ -1,6 +1,6 @@
 // Your application styles go here
 // bower:scss
-@import "../lib/bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
+@import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
 // endbower
 
 @import "_functions";
@@ -232,7 +232,7 @@ h1.title {
   }
 }
 
-@mixin timer-board($tile-count: 4) {
+@mixin layout-board($tile-count: 4) {
   $tile-size: ($width - $tile-padding * ($tile-count + 1)) / $tile-count;
   #timer-#{$tile-count} {
     position: relative;
@@ -336,7 +336,7 @@ h1.title {
 }
 
 @for $i from $min-tile-count through $max-tile-count {
-  @include timer-board($i);
+  @include layout-board($i);
 }
 
 @include keyframes(appear) {

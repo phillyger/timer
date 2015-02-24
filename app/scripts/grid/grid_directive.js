@@ -9,10 +9,5 @@ angular.module('Grid')
       ngModel: '='
     },
     templateUrl: 'scripts/grid/grid.html'
-    //controller: function($scope) {
-    //  $scope.selectTimer = function() {
-    //    console.log('Inside scope');
-    //  };
-    //}
   };
 });

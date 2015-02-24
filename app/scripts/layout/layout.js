@@ -1,30 +1,30 @@
 'use strict';
 
-angular.module('Timer', ['Grid', 'ngCookies'])
-.service('TimerManager', function($q, $timeout, GridService, $cookieStore) {
+angular.module('Layout', ['Grid', 'ngCookies'])
+.service('LayoutManager', function($q, $timeout, GridService, $cookieStore) {
 
-  this.getHighScore = function() {
-    return parseInt($cookieStore.get('highScore')) || 0;
-  };
+  //this.getHighScore = function() {
+  //  return parseInt($cookieStore.get('highScore')) || 0;
+  //};
 
   this.grid = GridService.grid;
   this.tiles = GridService.tiles;
-  this.timerSize = GridService.getSize();
+  this.layoutSize = GridService.getSize();
 
-  this.winningValue = 2048;
+  //this.winningValue = 2048;
 
-  this.reinit = function() {
-    this.timerOver = false;
-    this.win = false;
-    this.currentScore = 0;
-    this.highScore = this.getHighScore();
-  };
-  this.reinit();
+  //this.reinit = function() {
+  //  //this.timerOver = false;
+  //  //this.win = false;
+  //  //this.currentScore = 0;
+  //  //this.highScore = this.getHighScore();
+  //};
+  //this.reinit();
 
-  this.newTimer = function() {
-    GridService.buildEmptyTimerBoard();
+  this.newLayout = function() {
+    GridService.buildEmptyLayoutBoard();
     GridService.buildStartingPosition();
-    this.reinit();
+    //this.reinit();
   };
 
   /*
