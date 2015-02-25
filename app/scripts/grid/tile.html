@@ -3,10 +3,12 @@
   <div ng-show="showNumber()" class="tile-inner" ng-click="selectTimer(ngModel.x, ngModel.y)">
     {{ ngModel.value }}
   </div>
-  <div ng-show="showCountDownTimer()" class="tile-inner" ng-style="style">
+  <div ng-show="showCountDownTimer()" class="unstyled-tile" ng-style="style">
+    <label class="tile-label">LM</label><br/>
     <timer autostart="false" max-time-unit="'minute'" interval="1000" countdown="12">{{mminutes}}:{{sseconds}}</timer>
   </div>
-  <div ng-show="showCountUpTimer()" class="tile-inner" ng-style="style">
+  <div ng-show="showCountUpTimer()" class="unstyled-tile" ng-style="style">
+    <label class="tile-label">LM</label><br/>
     <timer autostart="false" max-time-unit="'minute'" interval="1000">{{mminutes}}:{{sseconds}}</timer>
   </div>
 </div>

@@ -66,7 +66,7 @@ angular.module('Grid', [])
 })
 .provider('GridService', function() {
   this.size = 4; // Default size
-  this.startingTileNumber = 16; // default starting tiles
+  this.startingTileNumber = 9; // default starting tiles
 
   this.setSize = function(sz) {
     this.size = sz ? sz : 0;
