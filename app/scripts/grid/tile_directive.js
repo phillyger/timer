@@ -8,7 +8,7 @@ angular.module('Grid')
       ngModel: '='
     },
     templateUrl: 'scripts/grid/tile.html',
-    controller: function($scope) {
+    controller: function($scope, $ionicActionSheet) {
 
       var timersRunning = false;
       var timerRunningCountDown = false;
@@ -19,6 +19,35 @@ angular.module('Grid')
 
       var colors = ['#66CC00', '#FFFF00', '#FF3333', '#9A2BC3'];
 
+      var menu = [
+        {category: 'Lobster', name: 'MNE 3-4', time: '150'},
+        {category: 'Pasta', name: 'CORK', time: '60'},
+        {category: 'Crab', name: 'Maryland', time: '120'}
+      ];
+
+      // Triggered on a button click, or some other target
+      var showActionSheet = function() {
+
+        // Show the action sheet
+        $ionicActionSheet.show({
+          buttons: [
+            { text: 'Lobster' },
+            { text: 'Pasta' },
+            { text: 'Crab' }
+          ],
+          titleText: 'Choose a Menu Option',
+          cancelText: 'Cancel',
+          cancel: function() {
+            // add cancel code..
+          },
+          buttonClicked: function(index) {
+
+            return true;
+          }
+        });
+
+
+      };
 
       $scope.style = { "background-color": colors[0]};
 
@@ -26,12 +55,16 @@ angular.module('Grid')
 
       $scope.timerType = 'Polling Server';
 
-      $scope.selectTimer = function(x, y) {
-        //console.log('scope');
-        //console.log($scope.ngModel.value);
-        $scope.$broadcast('timer-start');
+      $scope.selectTimer = function() {
+        showActionSheet();
+
+      };
+
+      $scope.stopTimer = function() {
+        $scope.$broadcast('timer-stop');
         timersRunning = true;
-        timerRunningCountDown = true;
+        timerRunningCountDown = false;
+        timerRunningCountUp = true;
       };
 
 
