@@ -24,6 +24,7 @@ angular.module('Grid', [])
     this.x      = pos.x;
     this.y      = pos.y;
     this.value  = val || 2;
+    this.countDownTime = 0;
 
     this.id = GenerateUniqueId.next();
     this.merged = null;

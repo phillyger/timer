@@ -1,14 +1,25 @@
 // Your application styles go here
 // bower:scss
 @import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
+@import "sass-mediaqueries/_media-queries.scss";
 // endbower
 
 @import "_functions";
 
-$width: 380px;
+$width: 400px;
+$width-320: 300px;
+$width-480: 400px;
+$width-768: 600px;
+$width-1024: 600px;
+
 $min-tile-count: 3;
 $max-tile-count: 6;
 $tile-padding: 15px;
+$tile-padding-320: 5px;
+$tile-padding-480: 15px;
+$tile-padding-768: 15px;
+$tile-padding-1024: 15px;
+
 $tile-radius: 3px;
 $tile-font: 'Open Sans', sans-serif;
 $colors:  #EEE4DA, // 2
@@ -35,6 +46,12 @@ $transition-time: 170ms;
 
 .container {
   max-width: 600px;
+
+  @include min-screen(320px)  { max-width: 300px; }
+  @include min-screen(480px)  { max-width: 460px; }
+  @include min-screen(768px)  { max-width: 700px; }
+  @include min-screen(1024px) { max-width: 900px; }
+
   padding-left: 5px;
   padding-right: 5px;
 }
@@ -185,12 +202,44 @@ h1.title {
   position: relative;
   width: $width;
   height: $width;
+  @include min-screen(320px)  {
+    width: $width-320;
+    height: $width-320;
+  }
+  @include min-screen(480px)  {
+    width: $width-480;
+    height: $width-480;
+  }
+  @include min-screen(768px)  {
+    width: $width-768;
+    height: $width-768;
+  }
+  @include min-screen(1024px) {
+    width: $width-1024;
+    height: $width-1024;
+  }
   margin: 40px auto;
 }
 
 .timer-overlay {
   width: $width;
   height: $width;
+  @include min-screen(320px)  {
+    width: $width-320;
+    height: $width-320;
+  }
+  @include min-screen(480px)  {
+    width: $width-480;
+    height: $width-480;
+  }
+  @include min-screen(768px)  {
+    width: $width-768;
+    height: $width-768;
+  }
+  @include min-screen(1024px) {
+    width: $width-1024;
+    height: $width-1024;
+  }
   background-color: rgba(255, 255, 255, 0.47);
   position: absolute;
   top: 0;
@@ -238,16 +287,70 @@ timer {
   font-size: .5em;
 }
 
+@mixin bp($point) {
+
+  $bp-phone: "(min-width: 320px)";
+  $bp-phone-landscape: "(min-width: 480px)";
+  $bp-tablet: "(min-width: 768px)";
+
+  @if $point == papa-bear {
+    @media #{$bp-tablet} { @content; }
+  }
+  @else if $point == mama-bear {
+    @media #{$bp-phone-landscape} { @content; }
+  }
+  @else if $point == baby-bear {
+    @media #{$bp-phone}  { @content; }
+  }
+
+}
+
+
 @mixin layout-board($tile-count: 4) {
   $tile-size: ($width - $tile-padding * ($tile-count + 1)) / $tile-count;
+  $tile-size-320: ($width-320 - $tile-padding-320 * ($tile-count + 1)) / $tile-count;
+  $tile-size-480: ($width-480 - $tile-padding-480 * ($tile-count + 1)) / $tile-count;
+  $tile-size-768: ($width-768 - $tile-padding-768 * ($tile-count + 1)) / $tile-count;
+  $tile-size-1024: ($width-1024 - $tile-padding-1024 * ($tile-count + 1)) / $tile-count;
+
+
+
   #timer-#{$tile-count} {
     position: relative;
     padding: $tile-padding;
+    @include min-screen(320px)  {
+      padding: $tile-padding-320;
+    }
+    @include min-screen(480px)  {
+      padding: $tile-padding-480;
+    }
+    @include min-screen(768px)  {
+      padding: $tile-padding-768;
+    }
+    @include min-screen(1024px) {
+      padding: $tile-padding-1024;
+    }
     cursor: default;
     background: #bbaaa0;
     border-radius: 6px;
     width: $width;
     height: $width;
+    @include min-screen(320px)  {
+      width: $width-320;
+      height: $width-320;
+    }
+    @include min-screen(480px)  {
+      width: $width-480;
+      height: $width-480;
+    }
+    @include min-screen(768px)  {
+      width: $width-768;
+      height: $width-768;
+    }
+    @include min-screen(1024px) {
+      width: $width-1024;
+      height: $width-1024;
+    }
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
@@ -260,8 +363,42 @@ timer {
       .grid-cell {
         width: $tile-size;
         height: $tile-size;
+        @include min-screen(320px)  {
+          width: $tile-size-320;
+          height: $tile-size-320;
+        }
+        @include min-screen(480px)  {
+          width: $tile-size-480;
+          height: $tile-size-480;
+        }
+        @include min-screen(768px)  {
+          width: $tile-size-768;
+          height: $tile-size-768;
+        }
+        @include min-screen(1024px) {
+          width: $tile-size-1024;
+          height: $tile-size-1024;
+        }
+
         margin-bottom: $tile-padding;
         margin-right: $tile-padding;
+        @include min-screen(320px)  {
+          margin-bottom: $tile-padding-320;
+          margin-right: $tile-padding-320;
+        }
+        @include min-screen(480px)  {
+          margin-bottom: $tile-padding-480;
+          margin-right: $tile-padding-480;
+        }
+        @include min-screen(768px)  {
+          margin-bottom: $tile-padding-768;
+          margin-right: $tile-padding-768;
+        }
+        @include min-screen(1024px) {
+          margin-bottom: $tile-padding-1024;
+          margin-right: $tile-padding-1024;
+        }
+
         float: left;
         @include border-radius($tile-radius);
         background: rgba(238, 228, 218, 0.35);
@@ -280,12 +417,30 @@ timer {
         position: absolute;
         width: $tile-size;
         height: $tile-size;
+        @include min-screen(320px)  {
+          width: $tile-size-320;
+          height: $tile-size-320;
+        }
+        @include min-screen(480px)  {
+          width: $tile-size-480;
+          height: $tile-size-480;
+        }
+        @include min-screen(768px)  {
+          width: $tile-size-768;
+          height: $tile-size-768;
+        }
+        @include min-screen(1024px) {
+          width: $tile-size-1024;
+          height: $tile-size-1024;
+        }
         background: white;
         margin: 0 auto;
         font-size: 2em;
         text-align: center;
         font-weight: bold;
         z-index: 10;
+        line-height: 15px;
+        padding: 10px;
 //        font-size: 2.5em;
 //        line-height: ($width/$tile-count) - $tile-padding;
       }
@@ -294,6 +449,22 @@ timer {
         position: absolute;
         width: $tile-size;
         height: $tile-size;
+        @include min-screen(320px)  {
+          width: $tile-size-320;
+          height: $tile-size-320;
+        }
+        @include min-screen(480px)  {
+          width: $tile-size-480;
+          height: $tile-size-480;
+        }
+        @include min-screen(768px)  {
+          width: $tile-size-768;
+          height: $tile-size-768;
+        }
+        @include min-screen(1024px) {
+          width: $tile-size-1024;
+          height: $tile-size-1024;
+        }
         @include border-radius($tile-radius);
         @include transition($transition-time ease-in-out);
         // @include transition-property(transform);
@@ -313,9 +484,45 @@ timer {
             $newX: ($tile-size) * ($zeroOffsetX) + ($tile-padding * $zeroOffsetX);
             $newY: ($tile-size) * ($zeroOffsetY) + ($tile-padding * $zeroOffsetY);
 
+            $newX-320: ($tile-size-320) * ($zeroOffsetX) + ($tile-padding-320 * $zeroOffsetX);
+            $newY-320: ($tile-size-320) * ($zeroOffsetY) + ($tile-padding-320 * $zeroOffsetY);
+
+            $newX-480: ($tile-size-480) * ($zeroOffsetX) + ($tile-padding-480 * $zeroOffsetX);
+            $newY-480: ($tile-size-480) * ($zeroOffsetY) + ($tile-padding-480 * $zeroOffsetY);
+
+            $newX-768: ($tile-size-768) * ($zeroOffsetX) + ($tile-padding-768 * $zeroOffsetX);
+            $newY-768: ($tile-size-768) * ($zeroOffsetY) + ($tile-padding-768 * $zeroOffsetY);
+
+            $newX-1024: ($tile-size-1024) * ($zeroOffsetX) + ($tile-padding-1024 * $zeroOffsetX);
+            $newY-1024: ($tile-size-1024) * ($zeroOffsetY) + ($tile-padding-1024 * $zeroOffsetY);
+
+
+
             &.position-#{$zeroOffsetX}-#{$zeroOffsetY} {
               @include transform(translate($newX, $newY));
             }
+
+            @include min-screen(320px)  {
+              &.position-#{$zeroOffsetX}-#{$zeroOffsetY} {
+                @include transform(translate($newX-320, $newY-320));
+              }
+            }
+            @include min-screen(480px)  {
+              &.position-#{$zeroOffsetX}-#{$zeroOffsetY} {
+                @include transform(translate($newX-480, $newY-480));
+              }
+            }
+            @include min-screen(768px)  {
+              &.position-#{$zeroOffsetX}-#{$zeroOffsetY} {
+                @include transform(translate($newX-768, $newY-768));
+              }
+            }
+            @include min-screen(1024px) {
+              &.position-#{$zeroOffsetX}-#{$zeroOffsetY} {
+                @include transform(translate($newX-1024, $newY-1024));
+              }
+            }
+
           }
         }
 
@@ -330,6 +537,18 @@ timer {
 
         .tile-inner {
           line-height: ($width/$tile-count) - $tile-padding;
+          @include min-screen(320px)  {
+            line-height: ($width-320/$tile-count) - $tile-padding;
+          }
+          @include min-screen(480px)  {
+            line-height: ($width-480/$tile-count) - $tile-padding;
+          }
+          @include min-screen(768px)  {
+            line-height: ($width-768/$tile-count) - $tile-padding;
+          }
+          @include min-screen(1024px) {
+            line-height: ($width-1024/$tile-count) - $tile-padding;
+          }
 
           text-align: center;
           font-weight: bold;
@@ -344,6 +563,7 @@ timer {
     }
   }
 }
+
 
 @for $i from $min-tile-count through $max-tile-count {
   @include layout-board($i);

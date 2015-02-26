@@ -4,11 +4,11 @@
     {{ ngModel.value }}
   </div>
   <div ng-show="showCountDownTimer()" class="unstyled-tile" ng-style="style">
-    <label class="tile-label">LM</label><br/>
-    <timer autostart="false" max-time-unit="'minute'" interval="1000" countdown="12">{{mminutes}}:{{sseconds}}</timer>
+    <label class="tile-label">{{ngModel.label}}</label><br/>
+    <timer id="countDown" autostart="false" max-time-unit="'minute'" interval="1000" countdown="ngModel.countDownTime">{{mminutes}}:{{sseconds}}</timer>
   </div>
   <div ng-show="showCountUpTimer()" class="unstyled-tile" ng-style="style" ng-click="stopTimer()">
-    <label class="tile-label">LM</label><br/>
-    <timer autostart="false" max-time-unit="'minute'" interval="1000">{{mminutes}}:{{sseconds}}</timer>
+    <label class="tile-label">{{ngModel.label}}</label><br/>
+    <timer id="countUp" autostart="false" max-time-unit="'minute'" interval="1000">{{mminutes}}:{{sseconds}}</timer>
   </div>
 </div>
