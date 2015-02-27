@@ -11,8 +11,10 @@ angular.module('TimerApp', ['ionic', 'config','Layout', 'Grid', 'ngAnimate', 'ng
 
     this.layout = LayoutManager;
 
+
     this.newLayout = function() {
       this.layout.newLayout();
+      this.layout.activeCells = false;
       //this.startTimer();
     };
 
