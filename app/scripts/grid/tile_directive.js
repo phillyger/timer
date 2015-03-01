@@ -15,19 +15,8 @@ angular.module('Grid')
         var timersRunning = false;
         var timerRunningCountDown = false;
         var timerRunningCountUp = false;
-        var timerCountDown = null;
-        var timerCountUp = null;
         var maxTicks = 0;
 
-
-        var getDOMTimers = function () {
-
-          $timeout(function () {
-            timerCountDown = angular.element(document.querySelector('#countDown'));
-            timerCountUp = angular.element(document.querySelector('#countUp'));
-          }, 1000);
-
-        };
 
         $scope.timerMinusTen = false;
 
@@ -70,29 +59,8 @@ angular.module('Grid')
               // add cancel code..
             },
             buttonClicked: function (index) {
-              //switch (index) {
-              //  case 0:
-              //    $scope.ngModel.label = menu[0].category;
-              //    setCountDownTime(menu[0].time);
-              //    break;
-              //  case 1:
-              //    $scope.ngModel.label = menu[1].category;
-              //    setCountDownTime(menu[1].time);
-              //    break;
-              //  case 2:
-              //
-              //    $scope.ngModel.label = menu[2].category;
-              //    setCountDownTime(menu[2].time);
-              //    break;
-              //  default:
-              //    break;
-              //
-              //}
               $scope.ngModel.label = menu[index].category;
               setCountDownTime(menu[index].time);
-
-
-
               return true;
             }
           });
@@ -133,7 +101,17 @@ angular.module('Grid')
           //  timerRunningCountUp = true;
           //});
 
-          
+
+            $scope.$broadcast('timer-stop');
+            //$scope.$broadcast('timer-reset');
+            $scope.style = {"background-color": colors[0]};
+            //console.log($scope);
+          $scope.ngModel.countDownTime  = null;
+          timersRunning = false;
+          timerRunningCountDown = false;
+          timerRunningCountUp = false;
+
+
 
         };
 
@@ -150,7 +128,7 @@ angular.module('Grid')
 
           $timeout(function () {
             $scope.$broadcast('timer-start');
-            getDOMTimers();
+            //getDOMTimers();
             timersRunning = true;
             timerRunningCountDown = true;
             LayoutManager.activeCells = true;
