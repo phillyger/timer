@@ -10,16 +10,12 @@ angular.module('Grid')
       templateUrl: 'scripts/grid/tile.html',
 
 
-      controller: function ($scope, $timeout, $ionicActionSheet, $ionicPopup, LayoutManager) {
+      controller: function ($scope, $compile, $timeout, $ionicActionSheet, $ionicPopup, LayoutManager) {
 
         var timersRunning = false;
         var timerRunningCountDown = false;
         var timerRunningCountUp = false;
         var maxTicks = 0;
-
-
-        $scope.timerMinusTen = false;
-
 
         var colors = ['#66CC00', '#FFFF00', '#FF3333', '#9A2BC3'];
 
@@ -59,6 +55,7 @@ angular.module('Grid')
               // add cancel code..
             },
             buttonClicked: function (index) {
+              console.log(menu[index]);
               $scope.ngModel.label = menu[index].category;
               setCountDownTime(menu[index].time);
               return true;
@@ -82,59 +79,58 @@ angular.module('Grid')
 
         $scope.stopTimer = function () {
 
-          //$scope.$broadcast('timer-stop');
-          //var confirmPopup = $ionicPopup.confirm({
-          //  title: 'Stop Timer',
-          //  template: 'Are you sure you want to stop the timer?'
-          //});
-          //confirmPopup.then(function (res) {
-          //  if (res) {
-          //    console.log('You are sure');
-          //    $scope.$broadcast('timer-stop');
-          //  } else {
-          //    console.log('You are not sure');
-          //    $scope.$broadcast('timer-resume');
-          //  }
-          //}).then(function (res) {
-          //  timersRunning = true;
-          //  timerRunningCountDown = false;
-          //  timerRunningCountUp = true;
-          //});
 
+
+
+          $timeout(function () {
 
             $scope.$broadcast('timer-stop');
-            //$scope.$broadcast('timer-reset');
-            $scope.style = {"background-color": colors[0]};
-            //console.log($scope);
-          $scope.ngModel.countDownTime  = null;
-          timersRunning = false;
-          timerRunningCountDown = false;
-          timerRunningCountUp = false;
+            $scope.$broadcast('timer-set-countdown-seconds', 0);
+            $scope.ngModel.countDownTime = 0;
+            $scope.countdown = 0;
+            resetScope();
+          }, 0);
+
+
 
 
 
         };
 
 
-        //$scope.getCountDownTime = function () {
-        //  console.log('Run getCountDownTime...');
-        //  return $scope.ngModel.countDownTime;
-        //};
+
+        var resetScope = function () {
+          $scope.style = {"background-color": colors[0]};
+          timersRunning = false;
+          timerRunningCountDown = false;
+          timerRunningCountUp = false;
+          maxTicks = 0;
+        };
 
         var setCountDownTime = function (time) {
 
-          $scope.ngModel.countDownTime = time;
           maxTicks = (time - 10) * 2; // ** MAJOR HACK ** need to multiply by 2 since 2 timer events will get called.
 
+
+          timersRunning = true;
+          timerRunningCountDown = true;
+          timerRunningCountUp= false;
+          LayoutManager.activeCells = true;
+
           $timeout(function () {
-            $scope.$broadcast('timer-start');
-            //getDOMTimers();
-            timersRunning = true;
-            timerRunningCountDown = true;
-            LayoutManager.activeCells = true;
+            $scope.setCountdown(time);
+            console.log(time);
           }, 0);
 
 
+        };
+
+        $scope.setCountdown = function(newVal) {
+          $scope.ngModel.countDownTime =newVal;
+          $scope.countdown =newVal;
+          $timeout(function(){
+            $scope.$broadcast('timer-start');
+          },0);
         };
 
         $scope.showNumber = function () {
@@ -156,8 +152,17 @@ angular.module('Grid')
 
         };
 
+        //$scope.$on('timer-stopped', function (event, args) {
+        //  args.timeoutId = null;
+        //  args.seconds = 0;
+        //  args.millis = 0;
+        //  console.log('Timer Stopped event: '+ event +' - data = ' +  args);
+        //  console.log(event);
+        //  console.log(args);
+        //});
+
         $scope.$on('timer-tick', function (event, args) {
-          var timerConsole = $scope.timerType + ' - event.name = ' + event.name + ', timeoutId = ' + args.timeoutId + ', millis = ' + args.millis + '\n';
+          //var timerConsole = $scope.timerType + ' - event.name = ' + event.name + ', timeoutId = ' + args.timeoutId + ', millis = ' + args.millis + '\n';
 
 
 
@@ -170,7 +175,7 @@ angular.module('Grid')
               $timeout(function () {
                 $scope.style = {"background-color": colors[1]};
               }, 0);
-              //$scope.$apply();
+
             }
 
             // when timer is within 0, change background to red and start timer counting up
@@ -186,7 +191,7 @@ angular.module('Grid')
 
               }, 0);
 
-              //$scope.$apply();
+
             }
           }
 
