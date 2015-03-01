@@ -36,7 +36,14 @@ angular.module('Grid')
 
         var menu = [
           {category: 'Lobster', name: 'MNE 3-4', time: 15},
-          {category: 'Pasta', name: 'CORK', time: 25},
+          {category: 'Lobster', name: 'MNE 4-5', time: 25},
+          {category: 'Lobster', name: 'ROCK 6', time: 215},
+          {category: 'Lobster', name: 'ROCK 9', time: 345},
+          {category: 'Live Maine', name: 'STM 1.25', time: 600},
+          {category: 'Live Maine', name: 'STM 2.0', time: 900},
+          {category: 'Live Maine', name: 'STM 3.0', time: 1200},
+          {category: 'Pasta', name: 'CORK', time: 20},
+          {category: 'Pasta', name: 'LING', time: 20},
           {category: 'Crab', name: 'Maryland', time: 70}
         ];
 
@@ -46,9 +53,16 @@ angular.module('Grid')
           // Show the action sheet
           $ionicActionSheet.show({
             buttons: [
-              {text: menu[0].category},
-              {text: menu[1].category},
-              {text: menu[2].category}
+              {text: menu[0].category + '-' + menu[0].name},
+              {text: menu[1].category + '-' + menu[1].name},
+              {text: menu[2].category + '-' + menu[2].name},
+              {text: menu[3].category + '-' + menu[3].name},
+              {text: menu[4].category + '-' + menu[4].name},
+              {text: menu[5].category + '-' + menu[5].name},
+              {text: menu[6].category + '-' + menu[6].name},
+              {text: menu[7].category + '-' + menu[7].name},
+              {text: menu[8].category + '-' + menu[8].name},
+              {text: menu[9].category + '-' + menu[9].name}
             ],
             titleText: 'Choose a Menu Option',
             cancelText: 'Cancel',
@@ -56,24 +70,27 @@ angular.module('Grid')
               // add cancel code..
             },
             buttonClicked: function (index) {
-              switch (index) {
-                case 0:
-                  $scope.ngModel.label = menu[0].category;
-                  setCountDownTime(menu[0].time);
-                  break;
-                case 1:
-                  $scope.ngModel.label = menu[1].category;
-                  setCountDownTime(menu[1].time);
-                  break;
-                case 2:
+              //switch (index) {
+              //  case 0:
+              //    $scope.ngModel.label = menu[0].category;
+              //    setCountDownTime(menu[0].time);
+              //    break;
+              //  case 1:
+              //    $scope.ngModel.label = menu[1].category;
+              //    setCountDownTime(menu[1].time);
+              //    break;
+              //  case 2:
+              //
+              //    $scope.ngModel.label = menu[2].category;
+              //    setCountDownTime(menu[2].time);
+              //    break;
+              //  default:
+              //    break;
+              //
+              //}
+              $scope.ngModel.label = menu[index].category;
+              setCountDownTime(menu[index].time);
 
-                  $scope.ngModel.label = menu[2].category;
-                  setCountDownTime(menu[2].time);
-                  break;
-                default:
-                  break;
-
-              }
 
 
               return true;
@@ -97,25 +114,26 @@ angular.module('Grid')
 
         $scope.stopTimer = function () {
 
-          $scope.$broadcast('timer-stop');
-          var confirmPopup = $ionicPopup.confirm({
-            title: 'Stop Timer',
-            template: 'Are you sure you want to stop the timer?'
-          });
-          confirmPopup.then(function (res) {
-            if (res) {
-              console.log('You are sure');
-              $scope.$broadcast('timer-stop');
-            } else {
-              console.log('You are not sure');
-              $scope.$broadcast('timer-resume');
-            }
-          }).then(function (res) {
-            timersRunning = true;
-            timerRunningCountDown = false;
-            timerRunningCountUp = true;
-          });
+          //$scope.$broadcast('timer-stop');
+          //var confirmPopup = $ionicPopup.confirm({
+          //  title: 'Stop Timer',
+          //  template: 'Are you sure you want to stop the timer?'
+          //});
+          //confirmPopup.then(function (res) {
+          //  if (res) {
+          //    console.log('You are sure');
+          //    $scope.$broadcast('timer-stop');
+          //  } else {
+          //    console.log('You are not sure');
+          //    $scope.$broadcast('timer-resume');
+          //  }
+          //}).then(function (res) {
+          //  timersRunning = true;
+          //  timerRunningCountDown = false;
+          //  timerRunningCountUp = true;
+          //});
 
+          
 
         };
 

@@ -48,7 +48,7 @@ $transition-time: 170ms;
   max-width: 600px;
 
   @include min-screen(320px)  { max-width: 300px; }
-  @include min-screen(480px)  { max-width: 460px; }
+  @include min-screen(480px)  { max-width: 420px; }
   @include min-screen(768px)  { max-width: 700px; }
   @include min-screen(1024px) { max-width: 900px; }
 
@@ -285,7 +285,21 @@ h1.title {
 }
 
 timer {
-  font-size: .5em;
+
+
+  font-size: 1em;
+  @include min-screen(320px)  {
+    font-size: .5em;
+  }
+  @include min-screen(480px)  {
+    font-size: .7em;
+  }
+  @include min-screen(768px)  {
+    font-size: 1em;
+  }
+  @include min-screen(1024px) {
+    font-size: 1em;
+  }
 }
 
 @mixin bp($point) {
@@ -436,14 +450,34 @@ timer {
         }
         background: white;
         margin: 0 auto;
+        padding: $tile-padding;
+        line-height: ($width/$tile-count) - $tile-padding/5;
         font-size: 2em;
+        @include min-screen(320px)  {
+          padding: $tile-padding-320;
+          line-height: (($width-320/$tile-count) - $tile-padding-320)/5;
+        }
+        @include min-screen(480px)  {
+          padding: $tile-padding-480;
+          line-height: (($width-480/$tile-count) - $tile-padding-480)/5;
+        }
+        @include min-screen(768px)  {
+          padding: $tile-padding-768;
+          line-height: (($width-768/$tile-count) - $tile-padding-768)/5;
+
+        }
+        @include min-screen(1024px) {
+          padding: $tile-padding-1024;
+          line-height: (($width-1024/$tile-count) - $tile-padding-1024)/5;
+        }
+
         text-align: center;
         font-weight: bold;
+        vertical-align: middle;
         z-index: 10;
-        line-height: 15px;
-        padding: 10px;
+
 //        font-size: 2.5em;
-//        line-height: ($width/$tile-count) - $tile-padding;
+
       }
       .tile {
         font-family: $tile-font;
@@ -539,17 +573,18 @@ timer {
         .tile-inner {
           line-height: ($width/$tile-count) - $tile-padding;
           @include min-screen(320px)  {
-            line-height: ($width-320/$tile-count) - $tile-padding;
+            line-height: ($width-320/$tile-count) - $tile-padding-320;
           }
           @include min-screen(480px)  {
-            line-height: ($width-480/$tile-count) - $tile-padding;
+            line-height: ($width-480/$tile-count) - $tile-padding-480;
           }
           @include min-screen(768px)  {
-            line-height: ($width-768/$tile-count) - $tile-padding;
+            line-height: ($width-768/$tile-count) - $tile-padding-768;
           }
           @include min-screen(1024px) {
-            line-height: ($width-1024/$tile-count) - $tile-padding;
+            line-height: ($width-1024/$tile-count) - $tile-padding-1024;
           }
+
 
           text-align: center;
           font-weight: bold;
@@ -558,6 +593,48 @@ timer {
         }
 
         .tile-label {
+
+          margin-bottom: 15px;
+          font-size: 1em;
+          @include min-screen(320px)  {
+            font-size: .5em;
+            margin-bottom: 5px;
+          }
+          @include min-screen(480px)  {
+            font-size: .6em;
+            margin-bottom: 10px;
+          }
+          @include min-screen(768px)  {
+            font-size: 1em;
+            margin-bottom: 15px;
+          }
+          @include min-screen(1024px) {
+            font-size: 1em;
+            margin-bottom: 15px;
+          }
+
+        }
+
+        .tile-sublabel {
+
+          margin-bottom: 15px;
+          font-size: 1em;
+          @include min-screen(320px)  {
+            font-size: .5em;
+            margin-bottom: 5px;
+          }
+          @include min-screen(480px)  {
+            font-size: .6em;
+            margin-bottom: 10px;
+          }
+          @include min-screen(768px)  {
+            font-size: 1em;
+            margin-bottom: 15px;
+          }
+          @include min-screen(1024px) {
+            font-size: 1em;
+            margin-bottom: 15px;
+          }
 
         }
       }

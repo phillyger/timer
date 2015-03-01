@@ -4,7 +4,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('TimerApp', ['ionic', 'config','Layout', 'Grid', 'ngAnimate', 'ngCookies', 'timer'])
+angular.module('RLTimerApp', ['ionic', 'config','Layout', 'Grid', 'ngAnimate', 'ngCookies', 'timer'])
   .config(function(GridServiceProvider) {
     GridServiceProvider.setSize(3);
   }).controller('TimerController', ['LayoutManager', '$scope', function(LayoutManager, $scope) {
