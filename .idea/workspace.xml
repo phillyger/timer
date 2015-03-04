@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4f1b5c54-ba24-495f-9929-6390f8bf452e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/scripts/grid/tile_directive.js" afterPath="$PROJECT_DIR$/app/scripts/grid/tile_directive.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="4f1b5c54-ba24-495f-9929-6390f8bf452e" name="Default" comment="" />
     <ignored path="rocklobster.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -30,8 +27,8 @@
       <file leaf-file-name="tile_directive.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/scripts/grid/tile_directive.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4955157" vertical-offset="1654" max-vertical-offset="3120">
-              <caret line="125" column="10" selection-start-line="125" selection-start-column="10" selection-end-line="125" selection-end-column="10" />
+            <state vertical-scroll-proportion="0.2601432" vertical-offset="2681" max-vertical-offset="3120">
+              <caret line="186" column="48" selection-start-line="186" selection-start-column="43" selection-end-line="186" selection-end-column="48" />
               <folding />
             </state>
           </provider>
@@ -759,8 +756,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/scripts/grid/tile_directive.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4955157" vertical-offset="1654" max-vertical-offset="3120">
-          <caret line="125" column="10" selection-start-line="125" selection-start-column="10" selection-end-line="125" selection-end-column="10" />
+        <state vertical-scroll-proportion="0.2601432" vertical-offset="2681" max-vertical-offset="3120">
+          <caret line="186" column="48" selection-start-line="186" selection-start-column="43" selection-end-line="186" selection-end-column="48" />
           <folding />
         </state>
       </provider>
