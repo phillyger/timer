@@ -11,9 +11,15 @@ $width-320: 300px;
 $width-480: 400px;
 $width-768: 600px;
 $width-1024: 600px;
+$height: 400px;
+$height-320: 400px;
+$height-480: 600px;
+$height-768: 800px;
+$height-1024: 800px;
 
-$min-tile-count: 3;
-$max-tile-count: 6;
+$tile-length: 4;
+$min-tile-width: 3;
+$max-tile-width: 4;
 $tile-padding: 15px;
 $tile-padding-320: 5px;
 $tile-padding-480: 15px;
@@ -201,44 +207,44 @@ h1.title {
 #timer-container {
   position: relative;
   width: $width;
-  height: $width;
+  height: $height;
   @include min-screen(320px)  {
     width: $width-320;
-    height: $width-320;
+    height: $height-320;
   }
   @include min-screen(480px)  {
     width: $width-480;
-    height: $width-480;
+    height: $height-480;
   }
   @include min-screen(768px)  {
     width: $width-768;
-    height: $width-768;
+    height: $height-768;
   }
   @include min-screen(1024px) {
     width: $width-1024;
-    height: $width-1024;
+    height: $height-1024;
   }
   margin: 40px auto;
 }
 
 .timer-overlay {
   width: $width;
-  height: $width;
+  height: $height;
   @include min-screen(320px)  {
     width: $width-320;
-    height: $width-320;
+    height: $height-320;
   }
   @include min-screen(480px)  {
     width: $width-480;
-    height: $width-480;
+    height: $height-480;
   }
   @include min-screen(768px)  {
     width: $width-768;
-    height: $width-768;
+    height: $height-768;
   }
   @include min-screen(1024px) {
     width: $width-1024;
-    height: $width-1024;
+    height: $height-1024;
   }
   background-color: rgba(255, 255, 255, 0.47);
   position: absolute;
@@ -321,18 +327,19 @@ timer {
 }
 
 
-@mixin layout-board($tile-count: 4) {
-  $tile-size: ($width - $tile-padding * ($tile-count + 1)) / $tile-count;
-  $tile-size-320: ($width-320 - $tile-padding-320 * ($tile-count + 1)) / $tile-count;
-  $tile-size-480: ($width-480 - $tile-padding-480 * ($tile-count + 1)) / $tile-count;
-  $tile-size-768: ($width-768 - $tile-padding-768 * ($tile-count + 1)) / $tile-count;
-  $tile-size-1024: ($width-1024 - $tile-padding-1024 * ($tile-count + 1)) / $tile-count;
+@mixin layout-board($tile-width: 4) {
+  $tile-size: ($width - $tile-padding * ($tile-width + 1)) / $tile-width;
+  $tile-size-320: ($width-320 - $tile-padding-320 * ($tile-width + 1)) / $tile-width;
+  $tile-size-480: ($width-480 - $tile-padding-480 * ($tile-width + 1)) / $tile-width;
+  $tile-size-768: ($width-768 - $tile-padding-768 * ($tile-width + 1)) / $tile-width;
+  $tile-size-1024: ($width-1024 - $tile-padding-1024 * ($tile-width + 1)) / $tile-width;
 
 
 
-  #timer-#{$tile-count} {
+  #timer-#{$tile-width} {
     position: relative;
     padding: $tile-padding;
+
     @include min-screen(320px)  {
       padding: $tile-padding-320;
     }
@@ -346,25 +353,25 @@ timer {
       padding: $tile-padding-1024;
     }
     cursor: default;
-    background: #bbaaa0;
+    background: #000000;
     border-radius: 6px;
     width: $width;
-    height: $width;
+    height: $height;
     @include min-screen(320px)  {
       width: $width-320;
-      height: $width-320;
+      height: $height-320;
     }
     @include min-screen(480px)  {
       width: $width-480;
-      height: $width-480;
+      height: $height-480;
     }
     @include min-screen(768px)  {
       width: $width-768;
-      height: $width-768;
+      height: $height-768;
     }
     @include min-screen(1024px) {
       width: $width-1024;
-      height: $width-1024;
+      height: $height-1024;
     }
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -426,6 +433,7 @@ timer {
     .tile-container {
       position: absolute;
       z-index: 2;
+      color: #000000;
 
       .unstyled-tile {
         font-family: $tile-font;
@@ -451,24 +459,24 @@ timer {
         background: white;
         margin: 0 auto;
         padding: $tile-padding;
-        line-height: ($width/$tile-count) - $tile-padding/5;
+        line-height: ($width/$tile-width) - $tile-padding/5;
         font-size: 2em;
         @include min-screen(320px)  {
           padding: $tile-padding-320;
-          line-height: (($width-320/$tile-count) - $tile-padding-320)/5;
+          line-height: (($width-320/$tile-width) - $tile-padding-320)/5;
         }
         @include min-screen(480px)  {
           padding: $tile-padding-480;
-          line-height: (($width-480/$tile-count) - $tile-padding-480)/5;
+          line-height: (($width-480/$tile-width) - $tile-padding-480)/5;
         }
         @include min-screen(768px)  {
           padding: $tile-padding-768;
-          line-height: (($width-768/$tile-count) - $tile-padding-768)/5;
+          line-height: (($width-768/$tile-width) - $tile-padding-768)/5;
 
         }
         @include min-screen(1024px) {
           padding: $tile-padding-1024;
-          line-height: (($width-1024/$tile-count) - $tile-padding-1024)/5;
+          line-height: (($width-1024/$tile-width) - $tile-padding-1024)/5;
         }
 
         text-align: center;
@@ -484,6 +492,8 @@ timer {
         position: absolute;
         width: $tile-size;
         height: $tile-size;
+        color: #000000;
+        background-color: #ffffff;
         @include min-screen(320px)  {
           width: $tile-size-320;
           height: $tile-size-320;
@@ -512,8 +522,8 @@ timer {
           @include animation(pop 200ms ease-in);
         }
 
-        @for $x from 1 through $tile-count {
-          @for $y from 1 through $tile-count {
+        @for $x from 1 through $tile-width {
+          @for $y from 1 through $tile-length {
             $zeroOffsetX: $x - 1;
             $zeroOffsetY: $y - 1;
             $newX: ($tile-size) * ($zeroOffsetX) + ($tile-padding * $zeroOffsetX);
@@ -571,18 +581,18 @@ timer {
 //        }
 
         .tile-inner {
-          line-height: ($width/$tile-count) - $tile-padding;
+          line-height: ($width/$tile-width) - $tile-padding;
           @include min-screen(320px)  {
-            line-height: ($width-320/$tile-count) - $tile-padding-320;
+            line-height: ($width-320/$tile-width) - $tile-padding-320;
           }
           @include min-screen(480px)  {
-            line-height: ($width-480/$tile-count) - $tile-padding-480;
+            line-height: ($width-480/$tile-width) - $tile-padding-480;
           }
           @include min-screen(768px)  {
-            line-height: ($width-768/$tile-count) - $tile-padding-768;
+            line-height: ($width-768/$tile-width) - $tile-padding-768;
           }
           @include min-screen(1024px) {
-            line-height: ($width-1024/$tile-count) - $tile-padding-1024;
+            line-height: ($width-1024/$tile-width) - $tile-padding-1024;
           }
 
 
@@ -643,7 +653,7 @@ timer {
 }
 
 
-@for $i from $min-tile-count through $max-tile-count {
+@for $i from $min-tile-width through $max-tile-width {
   @include layout-board($i);
 }
 

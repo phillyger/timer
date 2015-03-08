@@ -9,7 +9,8 @@ angular.module('Layout', ['Grid', 'ngCookies'])
 
   this.grid = GridService.grid;
   this.tiles = GridService.tiles;
-  this.layoutSize = GridService.getSize();
+  this.layoutSize = GridService.getWidth();
+  //  this.layoutDimensions = GridService.getDimensions();
     this.activeCells = false;
 
   //this.winningValue = 2048;

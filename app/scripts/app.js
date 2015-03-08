@@ -6,7 +6,8 @@
 // the 2nd parameter is an array of 'requires'
 angular.module('RLTimerApp', ['ionic', 'config','Layout', 'Grid', 'ngAnimate', 'ngCookies', 'timer'])
   .config(function(GridServiceProvider) {
-    GridServiceProvider.setSize(3);
+    //GridServiceProvider.setSize(3);
+    GridServiceProvider.setDimensions(3, 4);
   }).controller('TimerController', ['LayoutManager', '$scope', function(LayoutManager, $scope) {
 
     this.layout = LayoutManager;
