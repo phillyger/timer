@@ -3,7 +3,7 @@
   <div ng-show="showNumber()" class="tile-inner" ng-click="selectTimer()">
     {{ ngModel.value }}
   </div>
-  <div ng-show="showCountDownTimer()" class="unstyled-tile" ng-style="style">
+  <div ng-show="showCountDownTimer()" class="unstyled-tile" ng-style="style" ng-click="displayStopTimerActionPopup()">
     <label class="tile-label">{{ngModel.label}}</label><br/>
     <timer id="countDown" autostart="false" max-time-unit="'minute'" interval="1000" countdown="ngModel.countDownTime">{{mminutes}}:{{sseconds}}</timer>
   </div>

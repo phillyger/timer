@@ -19,52 +19,6 @@ angular.module('Grid')
 
         var colors = ['#66CC00', '#FFFF00', '#FF3333', '#9A2BC3'];
 
-        var menu = [
-          {category: 'Lobster', name: 'MNE 3-4', time: 15},
-          {category: 'Lobster', name: 'MNE 4-5', time: 25},
-          {category: 'Lobster', name: 'ROCK 6', time: 215},
-          {category: 'Lobster', name: 'ROCK 9', time: 345},
-          {category: 'Live Maine', name: 'STM 1.25', time: 600},
-          {category: 'Live Maine', name: 'STM 2.0', time: 900},
-          {category: 'Live Maine', name: 'STM 3.0', time: 1200},
-          {category: 'Pasta', name: 'CORK', time: 20},
-          {category: 'Pasta', name: 'LING', time: 20},
-          {category: 'Crab', name: 'Maryland', time: 70}
-        ];
-
-        // Triggered on a button click, or some other target
-        var showActionSheet = function () {
-
-          // Show the action sheet
-          $ionicActionSheet.show({
-            buttons: [
-              {text: menu[0].category + '-' + menu[0].name},
-              {text: menu[1].category + '-' + menu[1].name},
-              {text: menu[2].category + '-' + menu[2].name},
-              {text: menu[3].category + '-' + menu[3].name},
-              {text: menu[4].category + '-' + menu[4].name},
-              {text: menu[5].category + '-' + menu[5].name},
-              {text: menu[6].category + '-' + menu[6].name},
-              {text: menu[7].category + '-' + menu[7].name},
-              {text: menu[8].category + '-' + menu[8].name},
-              {text: menu[9].category + '-' + menu[9].name}
-            ],
-            titleText: 'Choose a Menu Option',
-            cancelText: 'Cancel',
-            cancel: function () {
-              // add cancel code..
-            },
-            buttonClicked: function (index) {
-              console.log(menu[index]);
-              $scope.ngModel.label = menu[index].category;
-              setCountDownTime(menu[index].time);
-              return true;
-            }
-          });
-
-
-        };
-
 
         $scope.style = {"background-color": colors[0]};
 
@@ -84,13 +38,11 @@ angular.module('Grid')
 
         $scope.stopTimer = function () {
 
-
-
-
           $timeout(function () {
 
             $scope.$broadcast('timer-stop');
-            $scope.$broadcast('timer-set-countdown-seconds', 0);
+            $scope.$broadcast('timer-clear');
+            $scope.$broadcast('timer-set-countdown', 0);
             $scope.ngModel.countDownTime = 0;
             $scope.countdown = 0;
             resetScope();
@@ -102,6 +54,25 @@ angular.module('Grid')
 
         };
 
+        $scope.displayStopTimerActionPopup = function() {
+
+          var confirmPopup = $ionicPopup.confirm({
+            title: 'Reset Timer',
+            template: 'Are you sure you want to reset the timer?'
+          });
+          confirmPopup.then(function(res) {
+            if(res) {
+              console.log('You are sure');
+              $scope.$broadcast('timer-stop');
+              $scope.$broadcast('timer-clear');
+              $scope.$broadcast('timer-set-countdown', 0);
+              resetScope();
+            } else {
+              console.log('You are not sure');
+            }
+          });
+
+        };
 
 
         var resetScope = function () {

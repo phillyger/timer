@@ -197,6 +197,10 @@ angular.module('RLTimerApp', ['ionic', 'config','Layout', 'Grid', 'ngAnimate', '
       //});
     //};
 
+    $rootScope.reset = function() {
+      console.log('Calling reset...');
+      ctrl.newLayout();
+    }
 
 
 

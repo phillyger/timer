@@ -9,13 +9,13 @@
 $width: 400px;
 $width-320: 300px;
 $width-480: 400px;
-$width-768: 600px;
-$width-1024: 600px;
+$width-768: 750px;
+$width-1024:750px;
 $height: 400px;
 $height-320: 400px;
 $height-480: 600px;
-$height-768: 800px;
-$height-1024: 800px;
+$height-768: 1000px;
+$height-1024: 1000px;
 
 $tile-length: 4;
 $min-tile-width: 3;
@@ -51,11 +51,11 @@ $bright-text-color: #f9f6f2;
 $transition-time: 170ms;
 
 .container {
-  max-width: 600px;
+  max-width: 750px;
 
   @include min-screen(320px)  { max-width: 300px; }
   @include min-screen(480px)  { max-width: 420px; }
-  @include min-screen(768px)  { max-width: 700px; }
+  @include min-screen(768px)  { max-width: 750px; }
   @include min-screen(1024px) { max-width: 900px; }
 
   padding-left: 5px;
@@ -118,71 +118,6 @@ h1.title {
   float: left;
 }
 
-.scores-container {
-  text-align: right;
-  float: right;
-}
-
-.score-container, .best-container {
-  $inner-height: 25px;
-
-  min-height: 2.5em;
-  min-width: 5em;
-
-  position: relative;
-  display: inline-block;
-  background: $timer-container-background;
-  padding: 15px 25px;
-  font-size: $inner-height;
-  height: $inner-height;
-  line-height: $inner-height + 22px;
-  font-weight: bold;
-  border-radius: 3px;
-  color: white;
-  margin-top: 8px;
-  text-align: center;
-
-  &:after {
-    position: absolute;
-    width: 100%;
-    top: 10px;
-    left: 0;
-    text-transform: uppercase;
-    font-size: 13px;
-    line-height: 13px;
-    text-align: center;
-    color: $tile-color;
-  }
-
-  .score-addition {
-    position: absolute;
-    right: 30px;
-    color: red;
-    font-size: $inner-height;
-    line-height: $inner-height;
-    font-weight: bold;
-    color: rgba($text-color, .9);
-    z-index: 100;
-    @include animation(move-up 600ms ease-in);
-    @include animation-fill-mode(both);
-  }
-}
-
-.score-container:after {
-  content: "Score";
-}
-
-.best-container:after {
-  content: "Best"
-}
-
-#instructions {
-  padding-top: 0.5em;
-
-  .restart-button {
-    margin-top: -0.5em; /* hack */
-  }
-}
 
 .restart-button {
   display: inline-block;
@@ -201,7 +136,7 @@ h1.title {
 }
 
 #content {
-
+  top: 0px;
 }
 
 #timer-container {
