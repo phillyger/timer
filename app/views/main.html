@@ -30,18 +30,65 @@
     <!--<div id="win" ng-if="ctrl.timer.win" class="row timer-overlay">-->
     <!--You win!-->
     <br/>
+    <script id="views/timer-modal.html" type="text/ng-template">
+      <ion-modal-view>
+        <ion-header-bar class="bar bar-header bar-positive">
+          <h1 class="title">Timer Selection</h1>
+          <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
+        </ion-header-bar>
+        <ion-side-menus>
+          <ion-side-menu-content scroll="true" has-header="true">
+            <div class="list" has-header="true">
+              <div class="item" ng-repeat="animal in data.menu | filter : data.filter">{{animal.name}}</div>
+            </div>
+          </ion-side-menu-content>
+
+          <ion-side-menu side="left">
+            <header class="bar bar-header bar-stable">
+              <h1 class="title">Left</h1>
+            </header>
+            <ion-content class="has-header">
+              <ion-list>
+                <ion-item ng-click="data.filter='Appetizer'">
+                  Appetizer
+                </ion-item>
+                <ion-item ng-click="data.filter='Crab'">
+                  Crab
+                </ion-item>
+                <ion-item ng-click="data.filter='Live Maine'">
+                  Live Maine
+                </ion-item>
+                <ion-item ng-click="data.filter='Lobster'">
+                  Lobster
+                </ion-item>
+                <ion-item ng-click="data.filter='Pasta'">
+                  Pasta
+                </ion-item>
+                <ion-item ng-click="data.filter='Sides'">
+                  Side
+                </ion-item>
+                <ion-item ng-click="data.filter='Soups'">
+                  Soups
+                </ion-item>
+                <ion-item ng-click="data.filter='Veggies'">
+                  Veggies
+                </ion-item>
+              </ion-list>
+            </ion-content>
+          </ion-side-menu>
+        </ion-side-menus>
+      </ion-modal-view>
+    </script>
 
 
-    <div ng-if="ctrl.layout.activeCells">
-      <div class="lower-left">
-        <button class="button button-calm" ng-click='ctrl.newLayout()'>Reset All</button>
-      </div>
+
+
 
       <!--<div class="lower-right">-->
         <!--<button class="button button-assertive" ng-click='ctrl.newLayout()'>Stop Timer</button>-->
       <!--</div>-->
 
-    </div>
+
   </div>
 
   <!--<p class="timer-explanation">-->
@@ -59,4 +106,8 @@
   <!--Created by <a href="http://fullstackedu.com">Fullstack.io</a> based on 2048 by <a href="http://gabrielecirulli.com" target="_blank">Gabriele Cirulli.</a> Based on <a href="https://itunes.apple.com/us/app/1024!/id823499224" target="_blank">1024 by Veewo Studio</a> and conceptually similar to <a href="http://asherv.com/threes/" target="_blank">Threes by Asher Vollmer.</a>-->
   <!--</p>-->
 
+
+
 </ion-content>
+
+

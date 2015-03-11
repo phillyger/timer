@@ -19,8 +19,8 @@ angular.module('Grid', [])
 })
 .factory('TileModel', function(GenerateUniqueId) {
   var Tile = function(pos, val) {
-    console.log(pos);
-    console.log("val: "+ val);
+    //console.log(pos);
+    //console.log("val: "+ val);
     this.x      = pos.x;
     this.y      = pos.y;
     this.value  = val || 2;

@@ -10,7 +10,7 @@ angular.module('Grid')
       templateUrl: 'scripts/grid/tile.html',
 
 
-      controller: function ($scope, $compile, $timeout, $ionicActionSheet, $ionicPopup, LayoutManager) {
+      controller: function ($rootScope, $scope, $compile, $timeout, $ionicActionSheet, $ionicPopup, LayoutManager) {
 
         var timersRunning = false;
         var timerRunningCountDown = false;
@@ -73,8 +73,13 @@ angular.module('Grid')
         $scope.timerType = 'Polling Server';
 
         $scope.selectTimer = function () {
-          showActionSheet();
+          //showActionSheet();
 
+          //console.log(this);
+          //console.log(this.$parent);
+          //console.log($rootScope);
+          //console.log("Open Modal...");
+          $rootScope.openModal(this.$parent);
         };
 
         $scope.stopTimer = function () {
@@ -107,7 +112,7 @@ angular.module('Grid')
           maxTicks = 0;
         };
 
-        var setCountDownTime = function (time) {
+        $scope.setCountDownTime = function (time) {
 
           maxTicks = (time - 10) * 2; // ** MAJOR HACK ** need to multiply by 2 since 2 timer events will get called.
 
