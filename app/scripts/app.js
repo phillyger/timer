@@ -175,9 +175,12 @@ angular.module('RLTimerApp', ['ionic', 'config','Layout', 'Grid', 'ngAnimate', '
     this.layout = LayoutManager;
 
 
-    this.setTimer = function(tileScope) {
-      tileScope.ngModel.label = 'Test';
-      tileScope.setCountDownTime(15);
+    this.setTimer = function(tileScope, time, title) {
+      console.log(tileScope);
+      console.log(time);
+      console.log(title);
+      tileScope.ngModel.label = title;
+      tileScope.setCountDownTime(time);
       $scope.closeModal();
     };
 
