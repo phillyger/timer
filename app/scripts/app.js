@@ -4,11 +4,11 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('RLTimerApp', ['ionic', 'config','Layout', 'Grid', 'ngAnimate', 'ngCookies', 'timer'])
+angular.module('RLTimerApp', ['ionic', 'config','Layout', 'Grid', 'ngAnimate', 'ngCookies', 'timer', 'ui.unique'])
   .config(function(GridServiceProvider) {
     //GridServiceProvider.setSize(3);
     GridServiceProvider.setDimensions(3, 4);
-  }).controller('TimerController', ['LayoutManager', '$rootScope','$scope', '$ionicModal', function(LayoutManager, $rootScope, $scope, $ionicModal) {
+  }).controller('TimerController', ['LayoutManager', '$rootScope','$scope', '$ionicModal','$ionicPopup', function(LayoutManager, $rootScope, $scope, $ionicModal, $ionicPopup) {
 
     var ctrl = this;
     ctrl.tileScope = null;
@@ -69,16 +69,17 @@ angular.module('RLTimerApp', ['ionic', 'config','Layout', 'Grid', 'ngAnimate', '
         {
           type : "Live Maine",
           name : "SPLT&CLN 1.25",
-          time : 480
+          time : 360
         },
         {
           type : "Live Maine",
           name : "SPLT&CLN 2.0",
-          time : 840
+          time : 480
         },
         {
           type : "Live Maine",
-          name : "SPLT&CLN 3.0"
+          name : "SPLT&CLN 3.0",
+          time : 840
         },
         {
           type : "Live Maine",
@@ -172,13 +173,21 @@ angular.module('RLTimerApp', ['ionic', 'config','Layout', 'Grid', 'ngAnimate', '
     };
 
 
+    $scope.selectedIndex = 0;
+
+    $scope.itemClicked = function ($index, itemType) {
+      //console.log($index);
+      $scope.selectedIndex = $index;
+      $scope.data.filter = itemType;
+    }
+
     this.layout = LayoutManager;
 
 
     this.setTimer = function(tileScope, time, title) {
-      console.log(tileScope);
-      console.log(time);
-      console.log(title);
+      //console.log(tileScope);
+      //console.log(time);
+      //console.log(title);
       tileScope.ngModel.label = title;
       tileScope.setCountDownTime(time);
       $scope.closeModal();
@@ -199,7 +208,22 @@ angular.module('RLTimerApp', ['ionic', 'config','Layout', 'Grid', 'ngAnimate', '
 
     $rootScope.reset = function() {
       console.log('Calling reset...');
-      ctrl.newLayout();
+
+      var confirmPopup = $ionicPopup.confirm({
+        title: 'Reset All Timers',
+        template: 'Are you sure you want to reset all timers?'
+      });
+
+      confirmPopup.then(function(res) {
+        if(res) {
+          console.log('You are sure');
+          ctrl.newLayout();
+        } else {
+          console.log('You are not sure');
+        }
+      });
+
+
     }
 
 

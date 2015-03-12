@@ -253,8 +253,14 @@ timer {
 }
 
 .menu-content {
-  padding-top: 44px;
+  padding-top: 45px;
 }
+
+.selected-class-name {
+  background-color: #d18027;
+  border: 2px solid #ffc666;
+}
+
 
 @mixin bp($point) {
 

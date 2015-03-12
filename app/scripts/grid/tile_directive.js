@@ -62,13 +62,13 @@ angular.module('Grid')
           });
           confirmPopup.then(function(res) {
             if(res) {
-              console.log('You are sure');
+              //console.log('You are sure');
               $scope.$broadcast('timer-stop');
               $scope.$broadcast('timer-clear');
               $scope.$broadcast('timer-set-countdown', 0);
               resetScope();
             } else {
-              console.log('You are not sure');
+              //console.log('You are not sure');
             }
           });
 
@@ -95,7 +95,7 @@ angular.module('Grid')
 
           $timeout(function () {
             $scope.setCountdown(time);
-            console.log(time);
+            //console.log(time);
           }, 0);
 
 

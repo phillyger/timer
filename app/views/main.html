@@ -36,44 +36,27 @@
         <ion-side-menus>
 
           <ion-side-menu-content scroll="true" has-header="true">
-            <ion-header-bar class="bar bar-header bar-positive">
+            <ion-header-bar class="bar bar-header bar-dark">
               <h1 class="title">Timer Selection</h1>
               <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
             </ion-header-bar>
             <div class="list" has-header="true">
-              <div class="item" ng-repeat="item in data.menu | filter : data.filter" ng-click="ctrl.setTimer(ctrl.tileScope, item.time, item.name)">{{item.name}}</div>
+              <div class="item"
+                   ng-repeat="item in data.menu | filter : data.filter"
+                   ng-click="ctrl.setTimer(ctrl.tileScope, item.time, item.name)">{{item.name}}</div>
             </div>
           </ion-side-menu-content>
 
           <ion-side-menu side="left" expose-aside-when="large" width="150">
-            <header class="bar bar-header bar-stable">
+            <header class="bar bar-header bar-dark">
               <h1 class="title">Category</h1>
             </header>
             <ion-content class="has-header">
               <ion-list>
-                <ion-item ng-click="data.filter='Appetizer'">
-                  Appetizer
-                </ion-item>
-                <ion-item ng-click="data.filter='Crab'">
-                  Crab
-                </ion-item>
-                <ion-item ng-click="data.filter='Live Maine'">
-                  Live Maine
-                </ion-item>
-                <ion-item ng-click="data.filter='Lobster'">
-                  Lobster
-                </ion-item>
-                <ion-item ng-click="data.filter='Pasta'">
-                  Pasta
-                </ion-item>
-                <ion-item ng-click="data.filter='Sides'">
-                  Sides
-                </ion-item>
-                <ion-item ng-click="data.filter='Soups'">
-                  Soups
-                </ion-item>
-                <ion-item ng-click="data.filter='Veggies'">
-                  Veggies
+                <ion-item ng-repeat="item in data.menu | unique:'type'"
+                          ng-click="itemClicked($index, item.type)"
+                          ng-class="{ 'selected-class-name': $index == selectedIndex }">
+                  {{item.type}}
                 </ion-item>
               </ion-list>
             </ion-content>
