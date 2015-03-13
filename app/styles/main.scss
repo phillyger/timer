@@ -254,6 +254,13 @@ timer {
 
 .menu-content {
   padding-top: 45px;
+  button {
+    @include min-screen(480px)  {
+      display: none;
+    }
+  }
+
+
 }
 
 .selected-class-name {
