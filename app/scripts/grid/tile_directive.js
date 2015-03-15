@@ -20,7 +20,7 @@ angular.module('Grid')
         var colors = ['#66CC00', '#FFFF00', '#FF3333', '#9A2BC3'];
 
 
-        $scope.style = {"background-color": colors[0]};
+        //$scope.style = {"background-color": colors[0]};
 
         $scope.tileColor = '';
 
@@ -76,7 +76,12 @@ angular.module('Grid')
 
 
         var resetScope = function () {
-          $scope.style = {"background-color": colors[0]};
+          //$scope.style = {"background-color": colors[0]};
+          var timer = document.getElementById('tile-count-down-timer-'+ $scope.ngModel.value);
+          move(timer)
+            .set('background-color', colors[0])
+            .end();
+
           timersRunning = false;
           timerRunningCountDown = false;
           timerRunningCountUp = false;
@@ -104,8 +109,15 @@ angular.module('Grid')
         $scope.setCountdown = function(newVal) {
           $scope.ngModel.countDownTime =newVal;
           $scope.countdown =newVal;
+          var timer = document.getElementById('tile-count-down-timer-'+ $scope.ngModel.value);
+          console.log('Setting initial color...');
+          move(timer)
+            .set('background-color', colors[0])
+            .end();
+
           $timeout(function(){
             $scope.$broadcast('timer-start');
+
           },0);
         };
 
@@ -128,14 +140,42 @@ angular.module('Grid')
 
         };
 
-        //$scope.$on('timer-stopped', function (event, args) {
-        //  args.timeoutId = null;
-        //  args.seconds = 0;
-        //  args.millis = 0;
-        //  console.log('Timer Stopped event: '+ event +' - data = ' +  args);
-        //  console.log(event);
-        //  console.log(args);
-        //});
+        function onBlinkTimeout(){
+
+          //console.log('tile-'+ $scope.ngModel.value);
+          //var cell = document.getElementById('tile-'+ $scope.ngModel.value);
+          //console.log(cell);
+
+          var timer = document.getElementById('tile-count-up-timer-'+ $scope.ngModel.value);
+          var highlightBack = move(timer)
+            .set('background-color', colors[2])
+            .duration('0.2s')
+            .end();
+
+          var highlight = move(timer)
+            .set('background-color', colors[1])
+            .duration('0.2s')
+            .then(highlightBack)
+            .end();
+
+
+          //var highlight = move(cell)
+          //  .set('background', '#B9F6CA')
+          //  .duration('0.2s')
+          //  .then(highlightBack)
+          //  .end();
+          $scope.blinkTimeout = $timeout(onBlinkTimeout,1000);
+        }
+
+
+        $scope.blink = function() {
+          if($scope.blinkTimeout) {
+            console.log('Cancelling blinkTimeout');
+            $timeout.cancel($scope.blinkTimeout);
+          }
+          //$scope.time = 0;
+          $scope.blinkTimeout = $timeout(onBlinkTimeout,0);
+        };
 
         $scope.$on('timer-tick', function (event, args) {
           //var timerConsole = $scope.timerType + ' - event.name = ' + event.name + ', timeoutId = ' + args.timeoutId + ', millis = ' + args.millis + '\n';
@@ -148,9 +188,17 @@ angular.module('Grid')
 
             // when timer is within 10, change background to yellow
             if (timerRunningCountDown && args.millis === 10000 && (warningTime < 0) ) {
-              $timeout(function () {
-                $scope.style = {"background-color": colors[1]};
-              }, 0);
+              console.log('tile-count-down-timer-'+ $scope.ngModel.value);
+              console.log('Setting warning color...');
+              var timer = document.getElementById('tile-count-down-timer-'+ $scope.ngModel.value);
+              move(timer)
+                .set('background-color', colors[1])
+                .end();
+
+              //$timeout(function () {
+              //  //$scope.style = {"background-color": colors[1]};
+              //
+              //}, 0);
 
             }
 
@@ -163,8 +211,8 @@ angular.module('Grid')
                 //$scope.$broadcast('timer-reset');
                 $scope.$broadcast('timer-clear');
                 $scope.$broadcast('timer-start');
-                $scope.style = {"background-color": colors[2]};
-
+                console.log('Calling blink...');
+                $scope.blink();
               }, 0);
 
 

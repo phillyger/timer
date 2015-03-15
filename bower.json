@@ -1,6 +1,7 @@
 {
-  "name": "RLTimer",
-  "version": "0.0.2",
+  "author": "Brilliant Age, Inc.",
+  "name": "red-lobster-cook-timer",
+  "version": "0.0.1",
   "dependencies": {
     "ionic": "v1.0.0-beta.14",
     "angular-timer": "~1.2.0",
@@ -12,7 +13,8 @@
     "angular-ui-utils": "0.2.2",
     "angular-cookies": "1.3.6",
     "angular-animate": "1.3.6",
-    "sass-mediaqueries": "~1.4.0"
+    "sass-mediaqueries": "~1.4.0",
+    "movejs": "https://raw.githubusercontent.com/visionmedia/move.js/0.4.0/move.min.js"
   },
   "devDependencies": {
     "angular-mocks": "~1.2.17",

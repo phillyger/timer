@@ -1,13 +1,13 @@
-<div ng-if='ngModel' class="tile position-{{ ngModel.x }}-{{ ngModel.y }} tile-{{ ngModel.value }}"
+<div ng-if='ngModel' id="tile-{{ngModel.value}}" class="tile position-{{ ngModel.x }}-{{ ngModel.y }} tile-{{ ngModel.value }}"
   ng-class="{ 'tile-merged': ngModel.merged}">
   <div ng-show="showNumber()" class="tile-inner" ng-click="selectTimer()">
     {{ ngModel.value }}
   </div>
-  <div ng-show="showCountDownTimer()" class="unstyled-tile" ng-style="style" ng-click="displayStopTimerActionPopup()">
+  <div ng-show="showCountDownTimer()" id="tile-count-down-timer-{{ngModel.value}}" class="unstyled-tile" ng-click="displayStopTimerActionPopup()">
     <label class="tile-label">{{ngModel.label}}</label><br/>
     <timer id="countDown" autostart="false" max-time-unit="'minute'" interval="1000" countdown="ngModel.countDownTime">{{mminutes}}:{{sseconds}}</timer>
   </div>
-  <div ng-show="showCountUpTimer()" class="unstyled-tile" ng-style="style" ng-click="stopTimer()">
+  <div ng-show="showCountUpTimer()" id="tile-count-up-timer-{{ngModel.value}}" class="unstyled-tile" ng-click="stopTimer()">
     <label class="tile-label">{{ngModel.label}}</label><br/>
     <timer id="countUp" autostart="false" max-time-unit="'minute'" interval="1000">{{mminutes}}:{{sseconds}}</timer>
   </div>
