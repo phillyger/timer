@@ -216,17 +216,21 @@ angular.module('Grid')
          * @type {boolean}
          */
         var shouldPlay = false;
-        var myMedia = null;
+        var myMedia = new Array(12);
 
         var onStop = function(){
-          if(myMedia !== null && shouldPlay){
-            myMedia.play();
+          var cellNum = $scope.ngModel.value;
+
+          if(myMedia[cellNum -1] !== null && shouldPlay){
+            myMedia[cellNum -1].play();
           }
         };
 
         MediaSrv.loadMedia('audio/alarm.mp3', onStop)
           .then(function(media){
-            myMedia = media;
+            var cellNum = $scope.ngModel.value;
+            console.log(cellNum);
+            myMedia[cellNum -1] = media;
           });
 
         $scope.playStart = function(){
@@ -236,7 +240,11 @@ angular.module('Grid')
 
         $scope.playStop = function() {
           shouldPlay = false;
-          myMedia.stop();
+          var cellNum = $scope.ngModel.value;
+          console.log(myMedia);
+          console.log('Stopping cell #: ' + cellNum);
+          myMedia[cellNum -1].stop();
+          //myMedia.stop();
         };
 
 

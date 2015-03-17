@@ -272,6 +272,13 @@ timer {
   border: 2px solid #ffc666;
 }
 
+ion-side-menu {
+  .item {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    font-weight: bold;
+  }
+}
 
 @mixin bp($point) {
 
