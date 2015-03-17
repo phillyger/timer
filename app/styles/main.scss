@@ -254,13 +254,17 @@ timer {
 
 .menu-content {
   padding-top: 45px;
-  button {
+  #showSideMenu {
     @include min-screen(480px)  {
       display: none;
     }
   }
 
 
+}
+
+.backgroundRed{
+  background: red;
 }
 
 .selected-class-name {
@@ -417,7 +421,7 @@ timer {
           width: $tile-size-1024;
           height: $tile-size-1024;
         }
-        background: white;
+//        background: white;
         margin: 0 auto;
         padding: $tile-padding;
         line-height: ($width/$tile-width) - $tile-padding/5;

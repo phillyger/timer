@@ -4,11 +4,12 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('CookTimer', ['ionic', 'config','Layout', 'Grid', 'ngAnimate', 'ngCookies', 'timer', 'ui.unique'])
+angular.module('CookTimer', ['ionic', 'ngCordova', 'config','Layout', 'Grid', 'my.cordova.plugins', 'ngAnimate', 'ngCookies', 'timer', 'ui.unique'])
   .config(function(GridServiceProvider) {
     //GridServiceProvider.setSize(3);
     GridServiceProvider.setDimensions(3, 4);
-  }).controller('TimerController', ['LayoutManager', '$rootScope','$scope', '$ionicModal','$ionicPopup', function(LayoutManager, $rootScope, $scope, $ionicModal, $ionicPopup) {
+  }).controller('TimerController', ['LayoutManager', '$rootScope','$scope', '$ionicModal','$ionicPopup', '$ionicPlatform','MediaSrv',
+    function(LayoutManager, $rootScope, $scope, $ionicModal, $ionicPopup, $ionicPlatform, MediaSrv) {
 
     var ctrl = this;
     ctrl.tileScope = null;
@@ -224,14 +225,79 @@ angular.module('CookTimer', ['ionic', 'config','Layout', 'Grid', 'ngAnimate', 'n
       });
 
 
-    }
+    };
 
 
-
-    this.newLayout();
+      this.newLayout();
 
     //console.log(this.layout);
   }])
+
+  .controller('PlayCtrl', function($scope, MediaSrv){
+    var myMedia = null;
+    MediaSrv.loadMedia('audio/alarm.mp3').then(function(media){
+      myMedia = media;
+    });
+
+    $scope.play = function(){
+      myMedia.play();
+    };
+  })
+
+  .controller('PlayLoopCtrl', function($scope, MediaSrv){
+    var shouldPlay = false;
+    var myMedia = null;
+    function onStop(){
+      if(myMedia !== null && shouldPlay){
+        myMedia.play();
+      }
+    }
+    MediaSrv.loadMedia('audio/alarm.mp3', onStop).then(function(media){
+      myMedia = media;
+    });
+
+    function playStart(){
+      shouldPlay = true;
+      onStop();
+    }
+    function playStop(){
+      shouldPlay = false;
+      myMedia.stop();
+    }
+  })
+
+  //.controller('PlayLoopMultiCtrl', function($scope, MediaSrv){
+  //  var shouldPlay = false;
+  //  var soundFiles = ['sounds/alarm.mp3', 'sounds/alarm.mp3', 'sounds/alarm.mp3'];
+  //  var playingMediaIndex = null;
+  //  var mediaInstances = [];
+  //  var onStop = function(){
+  //    if(shouldPlay){
+  //      if(playingMediaIndex === null){
+  //        playingMediaIndex = 0;
+  //      } else {
+  //        playingMediaIndex = (playingMediaIndex+1) % mediaInstances.length;
+  //      }
+  //      mediaInstances[playingMediaIndex].play();
+  //    }
+  //  };
+  //  for(var i in soundFiles){
+  //    MediaSrv.loadMedia(soundFiles[i], onStop).then(function(media){
+  //      mediaInstances.push(media);
+  //    });
+  //  }
+  //
+  //  function playStart(){
+  //    shouldPlay = true;
+  //    onStop();
+  //  }
+  //  function playStop(){
+  //    shouldPlay = false;
+  //    mediaInstances[playingMediaIndex].stop();
+  //  }
+  //})
+
+
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -243,5 +309,6 @@ angular.module('CookTimer', ['ionic', 'config','Layout', 'Grid', 'ngAnimate', 'n
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+
   });
 });

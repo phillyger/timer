@@ -10,13 +10,13 @@ angular.module('Grid')
       templateUrl: 'scripts/grid/tile.html',
 
 
-      controller: function ($rootScope, $scope, $compile, $timeout, $ionicActionSheet, $ionicPopup, LayoutManager) {
+      controller: function ($rootScope, $scope, $compile, $timeout, $ionicActionSheet, $ionicPopup, LayoutManager, MediaSrv) {
 
         var timersRunning = false;
         var timerRunningCountDown = false;
         var timerRunningCountUp = false;
         var maxTicks = 0;
-
+        var poll = null;
         var colors = ['#66CC00', '#FFFF00', '#FF3333', '#9A2BC3'];
 
 
@@ -76,7 +76,8 @@ angular.module('Grid')
 
 
         var resetScope = function () {
-          //$scope.style = {"background-color": colors[0]};
+          $scope.playStop();
+          $timeout.cancel($scope.blinkTimeout);
           var timer = document.getElementById('tile-count-down-timer-'+ $scope.ngModel.value);
           move(timer)
             .set('background-color', colors[0])
@@ -110,7 +111,7 @@ angular.module('Grid')
           $scope.ngModel.countDownTime =newVal;
           $scope.countdown =newVal;
           var timer = document.getElementById('tile-count-down-timer-'+ $scope.ngModel.value);
-          console.log('Setting initial color...');
+          //console.log('Setting initial color...');
           move(timer)
             .set('background-color', colors[0])
             .end();
@@ -140,23 +141,37 @@ angular.module('Grid')
 
         };
 
-        function onBlinkTimeout(){
+        function onBlinkTimeout(timer){
+
+          //var thisTimer  = timer;
 
           //console.log('tile-'+ $scope.ngModel.value);
           //var cell = document.getElementById('tile-'+ $scope.ngModel.value);
-          //console.log(cell);
+          //console.log(timer);
 
-          var timer = document.getElementById('tile-count-up-timer-'+ $scope.ngModel.value);
-          var highlightBack = move(timer)
-            .set('background-color', colors[2])
-            .duration('0.2s')
-            .end();
+          $timeout(function() {
+            //console.log('Show as red');
+            angular.element(timer).toggleClass("backgroundRed");
+          }, 100);
 
-          var highlight = move(timer)
-            .set('background-color', colors[1])
-            .duration('0.2s')
-            .then(highlightBack)
-            .end();
+          //move(timer)
+          //  .set('background-color', 'red')
+          //  //.duration('0.2s')
+          //  .then()
+          //  .set('background-color', 'white')
+          //  .duration('0.2s')
+          //  .then()
+          //  .set('background-color', 'red')
+          //  .duration('0.2s')
+          //  .end();
+
+          //highlightBack();
+
+          //var highlight = move(timer)
+          //  .set('background-color', colors[1])
+          //  .duration('0.2s')
+          //  .then(highlightBack)
+          //  .end();
 
 
           //var highlight = move(cell)
@@ -164,18 +179,66 @@ angular.module('Grid')
           //  .duration('0.2s')
           //  .then(highlightBack)
           //  .end();
-          $scope.blinkTimeout = $timeout(onBlinkTimeout,1000);
+
+          var polling_interval = 1000;
+          poll = function(timer)
+          {
+            //Execution code
+            return $timeout(function() {onBlinkTimeout(timer)}, polling_interval);
+          };
+
+          $scope.blinkTimeout = poll(timer);
+          //$scope.blinkTimeout = $timeout(onBlinkTimeout(timer),1000);
         }
 
 
-        $scope.blink = function() {
+        $scope.blink = function(timer) {
           if($scope.blinkTimeout) {
             console.log('Cancelling blinkTimeout');
             $timeout.cancel($scope.blinkTimeout);
           }
           //$scope.time = 0;
-          $scope.blinkTimeout = $timeout(onBlinkTimeout,0);
+          //console.log(timer);
+          var polling_interval = 0;
+          poll = function(timer)
+          {
+            //Execution code
+            return $timeout(function() {onBlinkTimeout(timer)}, polling_interval);
+          };
+
+          $scope.blinkTimeout = poll(timer);
+
+          //$scope.blinkTimeout = $timeout(onBlinkTimeout(timer), 0);
         };
+
+        /**
+         *
+         * @type {boolean}
+         */
+        var shouldPlay = false;
+        var myMedia = null;
+
+        var onStop = function(){
+          if(myMedia !== null && shouldPlay){
+            myMedia.play();
+          }
+        };
+
+        MediaSrv.loadMedia('audio/alarm.mp3', onStop)
+          .then(function(media){
+            myMedia = media;
+          });
+
+        $scope.playStart = function(){
+          shouldPlay = true;
+          onStop();
+        };
+
+        $scope.playStop = function() {
+          shouldPlay = false;
+          myMedia.stop();
+        };
+
 
         $scope.$on('timer-tick', function (event, args) {
           //var timerConsole = $scope.timerType + ' - event.name = ' + event.name + ', timeoutId = ' + args.timeoutId + ', millis = ' + args.millis + '\n';
@@ -188,17 +251,11 @@ angular.module('Grid')
 
             // when timer is within 10, change background to yellow
             if (timerRunningCountDown && args.millis === 10000 && (warningTime < 0) ) {
-              console.log('tile-count-down-timer-'+ $scope.ngModel.value);
-              console.log('Setting warning color...');
               var timer = document.getElementById('tile-count-down-timer-'+ $scope.ngModel.value);
+
               move(timer)
                 .set('background-color', colors[1])
                 .end();
-
-              //$timeout(function () {
-              //  //$scope.style = {"background-color": colors[1]};
-              //
-              //}, 0);
 
             }
 
@@ -206,14 +263,20 @@ angular.module('Grid')
             if (timerRunningCountDown && args.millis === 0  && (warningTime < 0)) {
               timerRunningCountDown = false;
               timerRunningCountUp = true;
+
               $timeout(function () {
 
                 //$scope.$broadcast('timer-reset');
                 $scope.$broadcast('timer-clear');
                 $scope.$broadcast('timer-start');
-                console.log('Calling blink...');
-                $scope.blink();
+
+
+                var timer = document.getElementById('tile-count-up-timer-'+ $scope.ngModel.value);
+                //console.log(timer);
+                $scope.blink(timer);
               }, 0);
+
+              $scope.playStart();
 
 
             }
