@@ -55,8 +55,8 @@
             <ion-content class="has-header">
               <ion-list>
                 <ion-item ng-repeat="item in data.menu | unique:'type'"
-                          ng-click="itemClicked($index, item.type)"
-                          ng-class="{ 'selected-class-name': $index == selectedIndex }">
+                          ng-click="categoryClicked($index, item.type)"
+                          ng-class="{ 'selected-class-name': $index == selectedCategoryIndex }">
                   {{item.type}}
                 </ion-item>
               </ion-list>

@@ -7,6 +7,10 @@
 angular.module('CookTimer', ['ionic', 'ngCordova', 'config', 'Layout', 'Grid', 'my.cordova.plugins', 'ngAnimate', 'ngCookies', 'timer', 'ui.unique'])
   .config(function (GridServiceProvider) {
 
+    /*
+     *  Define dimensions of grid.
+     *  Note: Changes here will require changes to SCSS.
+     */
     GridServiceProvider.setDimensions(3, 4);
 
   }).controller('TimerController', ['$http', 'LayoutManager', '$rootScope', '$scope', '$ionicModal', '$ionicPopup', '$ionicPlatform', 'MediaSrv',
@@ -15,12 +19,17 @@ angular.module('CookTimer', ['ionic', 'ngCordova', 'config', 'Layout', 'Grid', '
       var ctrl = this;
       ctrl.tileScope = null;
 
-      $scope.selectedIndex = 0;
+      // Default highlighted/selected category
+      $scope.selectedCategoryIndex = 0;
 
+      // Async call to pull in the timer info from local file
       $http.get('json/timer-data.json').success(function (data) {
         $scope.data = data;
       });
 
+      /*
+       *  Lifecycle events for Modal window
+       */
       $ionicModal.fromTemplateUrl('views/timer-modal.html', {
         scope: $scope,
         animation: 'slide-in-up'
@@ -49,8 +58,11 @@ angular.module('CookTimer', ['ionic', 'ngCordova', 'config', 'Layout', 'Grid', '
         // Execute action
       });
 
-      $scope.itemClicked = function ($index, itemType) {
-        $scope.selectedIndex = $index;
+      /*
+       *  Handle click for category
+       */
+      $scope.categoryClicked = function ($index, itemType) {
+        $scope.selectedCategoryIndex = $index;
         $scope.data.filter = itemType;
       };
 
