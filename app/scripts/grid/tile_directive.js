@@ -165,7 +165,7 @@ angular.module('Grid')
           }
         };
 
-        MediaSrv.loadMedia('sounds/alarm.mp3', onStop)
+        MediaSrv.loadMedia('audio/alarm.mp3', onStop)
           .then(function(media){
             var cellNum = $scope.ngModel.value;
             myMedia[cellNum -1] = media;

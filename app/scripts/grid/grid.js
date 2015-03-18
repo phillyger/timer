@@ -19,16 +19,12 @@ angular.module('Grid', [])
 })
 .factory('TileModel', function(GenerateUniqueId) {
   var Tile = function(pos, val) {
-    //console.log(pos);
-    //console.log("val: "+ val);
     this.x      = pos.x;
     this.y      = pos.y;
     this.value  = val || 2;
     this.countDownTime = 0;
     this.label = null;
-
     this.id = GenerateUniqueId.next();
-
   };
 
 
@@ -44,7 +40,7 @@ angular.module('Grid', [])
 .provider('GridService', function() {
   this.height = 4; // Default height
   this.width = 3; // Default width
-  this.startingTileNumber = 12; // default starting tiles
+  this.startingTileNumber = this.height * this.width; // default starting tiles
 
   this.setHeight = function(ht) {
     this.height = ht ? ht : 0;
@@ -89,15 +85,15 @@ angular.module('Grid', [])
     };
 
 
-
-    // Build timer board
+    /*
+     * Build timer board
+     */
     this.buildEmptyLayoutBoard = function() {
       var self = this;
       // Initialize our grid
       for (var x = 0; x < service.height * service.width; x++) {
         this.grid[x] = null;
       }
-
 
       this.forEach(function(x,y) {
         self.setCellAt({x:x,y:y}, null);
@@ -194,7 +190,6 @@ angular.module('Grid', [])
     this.setCellAt = function(pos, tile) {
       if (this.withinGrid(pos)) {
         var xPos = this._coordinatesToPosition(pos);
-        //console.log(tile);
         this.tiles[xPos] = tile;
       }
     };
@@ -242,24 +237,21 @@ angular.module('Grid', [])
       this.tiles[pos] = tile;
     };
 
+    /*
+     * Return a new tile
+     */
     this.newTile = function(pos, value) {
       return new TileModel(pos, value);
     };
 
     /*
-     * Remove a tile
+     * Remove an existing tile
      */
     this.removeTile = function(pos) {
       pos = this._coordinatesToPosition(pos);
       delete this.tiles[pos];
     };
 
-    /*
-     * Same position
-     */
-    this.samePositions = function(a, b) {
-      return a.x === b.x && a.y === b.y;
-    };
 
     /*
      * Get all the available tiles
@@ -275,7 +267,6 @@ angular.module('Grid', [])
         }
       });
 
-      //console.log(cells);
       return cells;
     };
 
@@ -290,19 +281,9 @@ angular.module('Grid', [])
       this.insertTile(tile);
     };
 
-    /*
-     * Get a randomly available cell from all the
-     * currently available cells
-     */
-    this.randomAvailableCell = function() {
-      var cells = this.availableCells();
-      if (cells.length > 0) {
-        return cells[Math.floor(Math.random() * cells.length)];
-      }
-    };
 
     /*
-     * Get a randomly available cell from all the
+     * Get next available cell from all the
      * currently available cells
      */
     this.nextAvailableCell = function() {
