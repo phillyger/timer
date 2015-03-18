@@ -25,36 +25,12 @@ angular.module('Grid', [])
     this.y      = pos.y;
     this.value  = val || 2;
     this.countDownTime = 0;
+    this.label = null;
 
     this.id = GenerateUniqueId.next();
-    this.merged = null;
+
   };
 
-  Tile.prototype.savePosition = function() {
-    this.originalX = this.x;
-    this.originalY = this.y;
-  };
-
-  Tile.prototype.reset = function() {
-    this.merged = null;
-  };
-
-  Tile.prototype.setMergedBy = function(arr) {
-    var self = this;
-    arr.forEach(function(tile) {
-      tile.merged = true;
-      tile.updatePosition(self.getPosition());
-    });
-  };
-
-  Tile.prototype.updateValue = function(newVal) {
-    this.value = newVal;
-  };
-
-  Tile.prototype.updatePosition = function(newPosition) {
-    this.x = newPosition.x;
-    this.y = newPosition.y;
-  };
 
   Tile.prototype.getPosition = function() {
     return {
@@ -83,9 +59,6 @@ angular.module('Grid', [])
       this.setHeight(ht);
     };
 
-  //this.setStartingTiles = function(num) {
-  //  this.startingTileNumber = num;
-  //};
 
   var service = this;
 
@@ -144,52 +117,6 @@ angular.module('Grid', [])
     };
 
     /*
-     * Due to the fact we calculate the next positions
-     * in order, we need to specify the order in which
-     * we calculate the next positions
-     */
-    //this.traversalDirections = function(key) {
-    //  var vector = vectors[key];
-    //  var positions = {x: [], y: []};
-    //  for (var x = 0; x < this.size; x++) {
-    //    positions.x.push(x);
-    //    positions.y.push(x);
-    //  }
-    //
-    //  if (vector.x > 0) {
-    //    positions.x = positions.x.reverse();
-    //  }
-    //  if (vector.y > 0) {
-    //    positions.y = positions.y.reverse();
-    //  }
-    //
-    //  return positions;
-    //};
-
-
-    /*
-     * Calculate the next position for a tile
-     */
-    //this.calculateNextPosition = function(cell, key) {
-    //  var vector = vectors[key];
-    //  var previous;
-    //
-    //  do {
-    //    previous = cell;
-    //    cell = {
-    //      x: previous.x + vector.x,
-    //      y: previous.y + vector.y
-    //    };
-    //  } while (this.withinGrid(cell) && this.cellAvailable(cell));
-    //
-    //  return {
-    //    newPosition: previous,
-    //    next: this.getCellAt(cell)
-    //  };
-    //};
-
-
-    /*
      * Is the position within the grid?
      */
     this.withinGrid = function(cell) {
@@ -210,7 +137,7 @@ angular.module('Grid', [])
 
     /*
      * Build the initial starting position
-     * with randomly placed tiles
+     * with specifically placed tiles
      */
     this.buildStartingPosition = function() {
       for (var x = this.startingTileNumber; x > 0;  x--) {
@@ -250,30 +177,6 @@ angular.module('Grid', [])
     };
 
     /*
-     * Check to see if there are any matches available
-     */
-    //this.tileMatchesAvailable = function() {
-    //  var totalSize = service.size * service.size;
-    //  for (var i = 0; i < totalSize; i++) {
-    //    var pos = this._positionToCoordinates(i);
-    //    var tile = this.tiles[i];
-    //
-    //    if (tile) {
-    //      // Check all vectors
-    //      for (var vectorName in vectors) {
-    //        var vector = vectors[vectorName];
-    //        var cell = { x: pos.x + vector.x, y: pos.y + vector.y };
-    //        var other = this.getCellAt(cell);
-    //        if (other && other.value === tile.value) {
-    //          return true;
-    //        }
-    //      }
-    //    }
-    //  }
-    //  return false;
-    //};
-
-    /*
      * Get a cell at a position
      */
     this.getCellAt = function(pos) {
@@ -296,17 +199,6 @@ angular.module('Grid', [])
       }
     };
 
-    //this.moveTile = function(tile, newPosition) {
-    //  var oldPos = {
-    //    x: tile.x,
-    //    y: tile.y
-    //  };
-    //
-    //  this.setCellAt(oldPos, null);
-    //  this.setCellAt(newPosition, tile);
-    //
-    //  tile.updatePosition(newPosition);
-    //};
 
     /*
      * Run a callback for every cell
@@ -339,9 +231,6 @@ angular.module('Grid', [])
      */
     this._coordinatesToPosition = function(pos) {
       return (pos.y * service.width) + pos.x;
-      //return (pos.y * service.size) + pos.x;
-      //return (pos.y * service.width) + pos.x;
-      //return pos.y + pos.x;
     };
 
     /*
@@ -390,14 +279,6 @@ angular.module('Grid', [])
       return cells;
     };
 
-    /*
-     * Randomly insert a new tile
-     */
-    //this.randomlyInsertNewTile = function() {
-    //  var cell = this.randomAvailableCell(),
-    //      tile = this.newTile(cell, 2);
-    //  this.insertTile(tile);
-    //};
 
     /*
      * Fixed insert of new tile

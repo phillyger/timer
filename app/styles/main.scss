@@ -252,11 +252,17 @@ timer {
   width: 100% ;
 }
 
-.menu-content {
+ion-side-menu-content {
   padding-top: 45px;
   #showSideMenu {
     @include min-screen(480px)  {
       display: none;
+    }
+  }
+  .list {
+    .item {
+      padding-top: 30px;
+      padding-bottom: 30px;
     }
   }
 
@@ -276,7 +282,9 @@ ion-side-menu {
   .item {
     padding-top: 30px;
     padding-bottom: 30px;
+    padding-left: 20%;
     font-weight: bold;
+    font-size: 1em;
   }
 }
 

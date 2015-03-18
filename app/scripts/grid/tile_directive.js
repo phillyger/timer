@@ -20,26 +20,12 @@ angular.module('Grid')
         var colors = ['#66CC00', '#FFFF00', '#FF3333', '#9A2BC3'];
 
 
-        //$scope.style = {"background-color": colors[0]};
-
-        $scope.tileColor = '';
-
-        $scope.timerType = 'Polling Server';
-
         $scope.selectTimer = function () {
-          //showActionSheet();
-
-          //console.log(this);
-          //console.log(this.$parent);
-          //console.log($rootScope);
-          //console.log("Open Modal...");
           $rootScope.openModal(this.$parent);
         };
 
         $scope.stopTimer = function () {
-
           $timeout(function () {
-
             $scope.$broadcast('timer-stop');
             $scope.$broadcast('timer-clear');
             $scope.$broadcast('timer-set-countdown', 0);
@@ -47,11 +33,6 @@ angular.module('Grid')
             $scope.countdown = 0;
             resetScope();
           }, 0);
-
-
-
-
-
         };
 
         $scope.displayStopTimerActionPopup = function() {
@@ -62,13 +43,12 @@ angular.module('Grid')
           });
           confirmPopup.then(function(res) {
             if(res) {
-              //console.log('You are sure');
               $scope.$broadcast('timer-stop');
               $scope.$broadcast('timer-clear');
               $scope.$broadcast('timer-set-countdown', 0);
               resetScope();
             } else {
-              //console.log('You are not sure');
+              // do nothing
             }
           });
 
@@ -97,11 +77,9 @@ angular.module('Grid')
           timersRunning = true;
           timerRunningCountDown = true;
           timerRunningCountUp= false;
-          LayoutManager.activeCells = true;
 
           $timeout(function () {
             $scope.setCountdown(time);
-            //console.log(time);
           }, 0);
 
 
@@ -111,7 +89,6 @@ angular.module('Grid')
           $scope.ngModel.countDownTime =newVal;
           $scope.countdown =newVal;
           var timer = document.getElementById('tile-count-down-timer-'+ $scope.ngModel.value);
-          //console.log('Setting initial color...');
           move(timer)
             .set('background-color', colors[0])
             .end();
@@ -142,43 +119,9 @@ angular.module('Grid')
         };
 
         function onBlinkTimeout(timer){
-
-          //var thisTimer  = timer;
-
-          //console.log('tile-'+ $scope.ngModel.value);
-          //var cell = document.getElementById('tile-'+ $scope.ngModel.value);
-          //console.log(timer);
-
           $timeout(function() {
-            //console.log('Show as red');
             angular.element(timer).toggleClass("backgroundRed");
           }, 100);
-
-          //move(timer)
-          //  .set('background-color', 'red')
-          //  //.duration('0.2s')
-          //  .then()
-          //  .set('background-color', 'white')
-          //  .duration('0.2s')
-          //  .then()
-          //  .set('background-color', 'red')
-          //  .duration('0.2s')
-          //  .end();
-
-          //highlightBack();
-
-          //var highlight = move(timer)
-          //  .set('background-color', colors[1])
-          //  .duration('0.2s')
-          //  .then(highlightBack)
-          //  .end();
-
-
-          //var highlight = move(cell)
-          //  .set('background', '#B9F6CA')
-          //  .duration('0.2s')
-          //  .then(highlightBack)
-          //  .end();
 
           var polling_interval = 1000;
           poll = function(timer)
@@ -188,7 +131,6 @@ angular.module('Grid')
           };
 
           $scope.blinkTimeout = poll(timer);
-          //$scope.blinkTimeout = $timeout(onBlinkTimeout(timer),1000);
         }
 
 
@@ -197,8 +139,7 @@ angular.module('Grid')
             console.log('Cancelling blinkTimeout');
             $timeout.cancel($scope.blinkTimeout);
           }
-          //$scope.time = 0;
-          //console.log(timer);
+
           var polling_interval = 0;
           poll = function(timer)
           {
@@ -208,7 +149,6 @@ angular.module('Grid')
 
           $scope.blinkTimeout = poll(timer);
 
-          //$scope.blinkTimeout = $timeout(onBlinkTimeout(timer), 0);
         };
 
         /**
@@ -220,16 +160,14 @@ angular.module('Grid')
 
         var onStop = function(){
           var cellNum = $scope.ngModel.value;
-
           if(myMedia[cellNum -1] !== null && shouldPlay){
             myMedia[cellNum -1].play();
           }
         };
 
-        MediaSrv.loadMedia('audio/alarm.mp3', onStop)
+        MediaSrv.loadMedia('sounds/alarm.mp3', onStop)
           .then(function(media){
             var cellNum = $scope.ngModel.value;
-            console.log(cellNum);
             myMedia[cellNum -1] = media;
           });
 
@@ -241,17 +179,11 @@ angular.module('Grid')
         $scope.playStop = function() {
           shouldPlay = false;
           var cellNum = $scope.ngModel.value;
-          console.log(myMedia);
-          console.log('Stopping cell #: ' + cellNum);
           myMedia[cellNum -1].stop();
-          //myMedia.stop();
         };
 
 
         $scope.$on('timer-tick', function (event, args) {
-          //var timerConsole = $scope.timerType + ' - event.name = ' + event.name + ', timeoutId = ' + args.timeoutId + ', millis = ' + args.millis + '\n';
-
-
 
           if (angular.isDefined($scope.ngModel.countDownTime)) {
 
@@ -290,7 +222,6 @@ angular.module('Grid')
             }
           }
 
-          //console.log(timerConsole);
         });
       }
     };

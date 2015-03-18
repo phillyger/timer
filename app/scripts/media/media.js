@@ -32,10 +32,10 @@ angular.module('my.cordova.plugins', ['ionic'])
 
         if($ionicPlatform.is('android')){
           src = '/android_asset/www/' + src;
-          console.log("media src: "+ src);
+          //console.log("media src: "+ src);
         } else {
 
-          console.log("media src: "+ src);
+          //console.log("media src: "+ src);
         }
         var media = new $window.Media(src, mediaSuccess, mediaError, mediaStatus);
         media.status = mediaStatus;

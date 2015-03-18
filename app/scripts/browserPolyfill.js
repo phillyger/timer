@@ -3,7 +3,7 @@
  */
 // browser mocking for media plugin : http://plugins.cordova.io/#/package/org.apache.cordova.media
 window.Media = function(src, mediaSuccess, mediaError, mediaStatus){
-  // src: A URI containing the audio content. (DOMString)
+  // src: A URI containing the sounds content. (DOMString)
   // mediaSuccess: (Optional) The callback that executes after a Media object has completed the current play, record, or stop action. (Function)
   // mediaError: (Optional) The callback that executes if an error occurs. (Function)
   // mediaStatus: (Optional) The callback that executes to indicate status changes. (Function)
@@ -17,25 +17,25 @@ window.Media = function(src, mediaSuccess, mediaError, mediaStatus){
   sound.load();
 
   return {
-    // Returns the current position within an audio file (in seconds).
+    // Returns the current position within an sounds file (in seconds).
     getCurrentPosition: function(mediaSuccess, mediaError){ mediaSuccess(sound.currentTime); },
-    // Returns the duration of an audio file (in seconds) or -1.
+    // Returns the duration of an sounds file (in seconds) or -1.
     getDuration: function(){ return isNaN(sound.duration) ? -1 : sound.duration; },
-    // Start or resume playing an audio file.
+    // Start or resume playing an sounds file.
     play: function(){ sound.play(); },
-    // Pause playback of an audio file.
+    // Pause playback of an sounds file.
     pause: function(){ sound.pause(); },
-    // Releases the underlying operating system's audio resources. Should be called on a ressource when it's no longer needed !
+    // Releases the underlying operating system's sounds resources. Should be called on a ressource when it's no longer needed !
     release: function(){},
-    // Moves the position within the audio file.
+    // Moves the position within the sounds file.
     seekTo: function(milliseconds){}, // TODO
-    // Set the volume for audio playback (between 0.0 and 1.0).
+    // Set the volume for sounds playback (between 0.0 and 1.0).
     setVolume: function(volume){ sound.volume = volume; },
-    // Start recording an audio file.
+    // Start recording an sounds file.
     startRecord: function(){},
-    // Stop recording an audio file.
+    // Stop recording an sounds file.
     stopRecord: function(){},
-    // Stop playing an audio file.
+    // Stop playing an sounds file.
     stop: function(){ sound.pause(); if(mediaSuccess){mediaSuccess();} } // TODO
   };
 };
