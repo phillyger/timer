@@ -1,11 +1,13 @@
 node_modules
 www
+.idea
 .tmp
 .sass-cache
 app/lib
 coverage
 platforms
 plugins
+*.keystore
 *.swp
 *.swo
 *.log
