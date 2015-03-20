@@ -1,123 +1,123 @@
 {
-  "filter" : "Appetizer",
+  "filter" : "APPETIZER",
   "menu": [
     {
-      "type" : "Appetizer",
+      "type" : "APPETIZER",
       "name" : "CLAM",
       "time" : 180
     },
     {
-      "type" : "Appetizer",
+      "type" : "APPETIZER",
       "name" : "MUSSEL",
       "time" : 90
     },
     {
-      "type" : "Crab",
+      "type" : "CRAB",
       "name" : "KING",
       "time" : 300
     },
     {
-      "type" : "Crab",
+      "type" : "CRAB",
       "name" : "SNOW",
       "time" : 240
     },
     {
-      "type" : "Live Maine",
+      "type" : "LIVE MAINE",
       "name" : "SPLT&CLN 1.25",
       "time" : 360
     },
     {
-      "type" : "Live Maine",
+      "type" : "LIVE MAINE",
       "name" : "SPLT&CLN 2.0",
       "time" : 480
     },
     {
-      "type" : "Live Maine",
+      "type" : "LIVE MAINE",
       "name" : "SPLT&CLN 3.0",
       "time" : 840
     },
     {
-      "type" : "Live Maine",
+      "type" : "LIVE MAINE",
       "name" : "SPLT&CLN 4.0",
       "time" : 960
     },
     {
-      "type" : "Live Maine",
+      "type" : "LIVE MAINE",
       "name" : "STM 1.25",
       "time" : 600
     },
     {
-      "type" : "Live Maine",
+      "type" : "LIVE MAINE",
       "name" : "STM 2.0",
       "time" : 900
     },
     {
-      "type" : "Live Maine",
+      "type" : "LIVE MAINE",
       "name" : "STM 3.0",
       "time" : 1200
     },
     {
-      "type" : "Live Maine",
+      "type" : "LIVE MAINE",
       "name" : "STM 4.0",
       "time" : 1500
     },
     {
-      "type" : "Lobster",
+      "type" : "LOBSTER",
       "name" : "MNE 3-4",
       "time" : 150
     },
     {
-      "type" : "Lobster",
+      "type" : "LOBSTER",
       "name" : "MNE 4-5",
       "time" : 255
     },
     {
-      "type" : "Lobster",
+      "type" : "LOBSTER",
       "name" : "ROCK-6",
       "time" : 225
     },
     {
-      "type" : "Lobster",
+      "type" : "LOBSTER",
       "name" : "ROCK-9",
       "time" : 345
     },
     {
-      "type" : "Pasta",
+      "type" : "PASTA",
       "name" : "LING",
       "time" : 20
     },
     {
-      "type" : "Pasta",
+      "type" : "PASTA",
       "name" : "CORK",
       "time" : 20
     },
     {
-      "type" : "Sides",
+      "type" : "SIDES",
       "name" : "MASHED",
       "time" : 1500
     },
     {
-      "type" : "Soups",
+      "type" : "SOUPS",
       "name" : "POTATO",
       "time" : 1500
     },
     {
-      "type" : "Soups",
+      "type" : "SOUPS",
       "name" : "BISQUE",
       "time" : 1200
     },
     {
-      "type" : "Soups",
+      "type" : "SOUPS",
       "name" : "GUMBO",
       "time" : 1200
     },
     {
-      "type" : "Soups",
+      "type" : "SOUPS",
       "name" : "MANHATTAN",
       "time" : 1200
     },
     {
-      "type" : "Veggies",
+      "type" : "VEGGIES",
       "name" : "BROC",
       "time" : 210
     }
